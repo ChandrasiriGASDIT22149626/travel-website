@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 // --- FIXED ANIMATIONS ---
-// Added 'as const' to ease values to satisfy TypeScript
+// The 'as const' keyword fixes the TypeScript build error
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
