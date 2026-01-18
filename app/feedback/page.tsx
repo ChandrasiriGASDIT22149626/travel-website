@@ -1,186 +1,154 @@
 'use client';
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion'; 
 import { Star, Send, ArrowLeft, MessageCircleHeart } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// --- CONFIGURATION ---
-const WHATSAPP_NUMBER = "94764136737";
-
-// --- ANIMATION VARIANTS ---
+// --- FIXED VARIANTS (Added 'as const' to fix build error) ---
 const containerVariants = {
-  hidden: { opacity: 0, scale: 0.8, rotate: -2 },
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
   visible: { 
     opacity: 1, 
     scale: 1, 
-    rotate: 0,
-    transition: { type: "spring", stiffness: 100, damping: 15 } 
+    y: 0, 
+    transition: { 
+      type: "spring" as const, 
+      stiffness: 100, 
+      damping: 15 
+    } 
+  },
+  exit: { 
+    opacity: 0, 
+    scale: 0.9, 
+    transition: { duration: 0.2 } 
   }
 };
 
-const emojiVariants = {
-  initial: { scale: 0.5, opacity: 0, y: 20 },
-  animate: { scale: 1, opacity: 1, y: 0, transition: { type: "spring", stiffness: 200 } },
-  exit: { scale: 0.5, opacity: 0, y: -20, transition: { duration: 0.2 } }
+const starVariants = {
+  hover: { scale: 1.2, rotate: 10 },
+  tap: { scale: 0.8, rotate: -10 }
 };
 
-export default function FeedbackPage() {
+export default function Feedback() {
   const [rating, setRating] = useState(0);
-  const [hoveredStar, setHoveredStar] = useState(0);
-  const [feedback, setFeedback] = useState("");
-  const [name, setName] = useState("");
-
-  // Emoji logic based on rating
-  const getEmoji = (r: number) => {
-    switch (r) {
-      case 1: return "😢";
-      case 2: return "😕";
-      case 3: return "😐";
-      case 4: return "😊";
-      case 5: return "🤩";
-      default: return "👋";
-    }
-  };
-
-  const getLabel = (r: number) => {
-    switch (r) {
-      case 1: return "Oh no! What went wrong?";
-      case 2: return "We can do better.";
-      case 3: return "It was okay.";
-      case 4: return "Good experience!";
-      case 5: return "Absolutely loved it!";
-      default: return "How was your trip?";
-    }
-  };
+  const [hoveredRating, setHoveredRating] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (rating === 0) {
-      alert("Please select a star rating to continue! ✨");
-      return;
-    }
-
-    const stars = "⭐".repeat(rating);
-    const message = `
-🌈 *New Feedback!* 🌈
------------------------
-👤 *Name:* ${name || "Anonymous"}
-${getEmoji(rating)} *Rating:* ${rating}/5 ${stars}
-💬 *Feedback:* ${feedback || "No comments."}
-    `.trim();
-
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
+    setSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen font-sans flex flex-col bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
       <Header />
+      
+      <main className="flex-grow flex items-center justify-center p-4 relative pt-24 pb-12">
+        {/* Background Decoration */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-slate-900 rounded-b-[3rem]"></div>
+        </div>
 
-      {/* --- MAIN CONTENT --- */}
-      <main className="flex-grow flex items-center justify-center p-4 pt-32 pb-20">
-        
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="w-full max-w-lg bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-10 relative overflow-hidden text-center"
-        >
-          {/* Decorative Blob */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-300 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-300 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-
-          {/* Back Link */}
-          <Link href="/" className="absolute top-8 left-8 text-gray-400 hover:text-gray-800 transition-colors">
-            <ArrowLeft size={24} />
-          </Link>
-
-          {/* Header Icon */}
-          <div className="bg-gradient-to-tr from-violet-600 to-indigo-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-indigo-200">
-            <MessageCircleHeart className="text-white w-10 h-10" />
-          </div>
-
-          <h2 className="text-3xl font-extrabold text-gray-800 mb-2">Feedback Time!</h2>
-          <p className="text-gray-500 mb-8">Help us sprinkle some magic on our tours.</p>
-
-          {/* --- STAR RATING --- */}
-          <div className="mb-2 h-16 flex items-center justify-center">
-             <AnimatePresence mode='wait'>
-                <motion.div 
-                  key={hoveredStar || rating || "default"}
-                  variants={emojiVariants}
-                  initial="initial" animate="animate" exit="exit"
-                  className="text-6xl"
-                >
-                  {getEmoji(hoveredStar || rating)}
-                </motion.div>
-             </AnimatePresence>
-          </div>
-
-          <p className="text-sm font-bold text-violet-600 uppercase tracking-widest mb-4 h-6">
-            {getLabel(hoveredStar || rating)}
-          </p>
-
-          <div className="flex justify-center gap-2 mb-8">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <motion.button
-                key={star}
-                whileHover={{ scale: 1.2, rotate: 15 }}
-                whileTap={{ scale: 0.8 }}
-                onClick={() => setRating(star)}
-                onMouseEnter={() => setHoveredStar(star)}
-                onMouseLeave={() => setHoveredStar(0)}
-                className="focus:outline-none transition-all"
-              >
-                <Star 
-                  size={45} 
-                  className={`transition-all duration-300 drop-shadow-sm ${
-                    star <= (hoveredStar || rating) 
-                      ? "fill-yellow-400 text-yellow-400 scale-110" 
-                      : "fill-gray-100 text-gray-300"
-                  }`} 
-                />
-              </motion.button>
-            ))}
-          </div>
-
-          {/* --- FORM --- */}
-          <form onSubmit={handleSubmit} className="space-y-4 text-left">
-            <div>
-              <label className="text-xs font-bold text-gray-400 uppercase ml-1">Your Name</label>
-              <input 
-                type="text" 
-                placeholder="John Doe"
-                className="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-gray-800 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:bg-white transition-all"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            
-            <div>
-              <label className="text-xs font-bold text-gray-400 uppercase ml-1">Your Thoughts</label>
-              <textarea 
-                rows={3}
-                placeholder="Tell us what you liked..."
-                className="w-full bg-gray-50 border border-gray-100 rounded-2xl p-4 text-gray-800 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:bg-white transition-all resize-none"
-                onChange={(e) => setFeedback(e.target.value)}
-              />
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.03, boxShadow: "0px 10px 20px rgba(139, 92, 246, 0.3)" }}
-              whileTap={{ scale: 0.97 }}
-              type="submit"
-              className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-lg py-4 rounded-2xl shadow-lg flex items-center justify-center gap-2 mt-4"
+        <AnimatePresence mode='wait'>
+          {!submitted ? (
+            <motion.div 
+              key="form"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="relative z-10 w-full max-w-lg bg-white rounded-[2rem] shadow-2xl p-8 md:p-12"
             >
-              Send Feedback <Send size={20} />
-            </motion.button>
-          </form>
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MessageCircleHeart size={32} />
+                </div>
+                <h1 className="text-3xl font-bold text-slate-900 mb-2">We value your opinion</h1>
+                <p className="text-slate-500">How was your experience with our travel services?</p>
+              </div>
 
-        </motion.div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Star Rating */}
+                <div className="flex justify-center gap-2 mb-8">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <motion.button
+                      key={star}
+                      type="button"
+                      variants={starVariants}
+                      whileHover="hover"
+                      whileTap="tap"
+                      onClick={() => setRating(star)}
+                      onMouseEnter={() => setHoveredRating(star)}
+                      onMouseLeave={() => setHoveredRating(0)}
+                      className="focus:outline-none"
+                    >
+                      <Star 
+                        size={36} 
+                        className={`transition-colors duration-200 ${
+                          star <= (hoveredRating || rating) 
+                            ? "fill-yellow-400 text-yellow-400" 
+                            : "text-slate-300"
+                        }`} 
+                      />
+                    </motion.button>
+                  ))}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Your Feedback</label>
+                  <textarea 
+                    required 
+                    rows={4} 
+                    placeholder="Tell us what you liked or how we can improve..." 
+                    className="w-full p-4 bg-slate-50 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all border border-transparent focus:border-blue-200"
+                  ></textarea>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Email (Optional)</label>
+                  <input 
+                    type="email" 
+                    placeholder="you@example.com" 
+                    className="w-full p-4 bg-slate-50 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all border border-transparent focus:border-blue-200"
+                  />
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full bg-slate-900 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all duration-300"
+                >
+                  Submit Review <Send size={20} />
+                </button>
+              </form>
+            </motion.div>
+          ) : (
+            <motion.div 
+              key="success"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="relative z-10 w-full max-w-lg bg-white rounded-[2rem] shadow-2xl p-12 text-center"
+            >
+              <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Send size={40} />
+              </div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">Thank You!</h2>
+              <p className="text-slate-500 text-lg mb-8">
+                Your feedback helps us create better experiences for travelers like you.
+              </p>
+              <Link 
+                href="/" 
+                className="inline-flex items-center justify-center gap-2 text-slate-900 font-bold hover:text-blue-600 transition-colors"
+              >
+                <ArrowLeft size={20} /> Back to Home
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
-
+      
       
     </div>
   );
