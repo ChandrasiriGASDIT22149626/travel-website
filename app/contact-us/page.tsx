@@ -1,21 +1,22 @@
 'use client';
 import React, { useState } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion'; 
 import { Mail, Phone, MapPin, Send, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// --- ANIMATION VARIANTS (Fixed Type Error) ---
-const fadeInUp: Variants = {
+// --- FIXED ANIMATIONS ---
+// Added 'as const' to ease values to satisfy TypeScript
+const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
+    transition: { duration: 0.6, ease: "easeOut" as const } 
   }
 };
 
-const staggerContainer: Variants = {
+const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -32,7 +33,6 @@ export default function ContactUs() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
-    // Simulate submission
     setTimeout(() => setFormStatus('success'), 2000);
   };
 
@@ -173,7 +173,7 @@ export default function ContactUs() {
         ></iframe>
       </section>
 
-     
+      
     </div>
   );
 }
