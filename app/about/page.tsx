@@ -84,15 +84,15 @@ export default function AboutPage() {
                    className="col-span-2 h-80 rounded-xl overflow-hidden shadow-2xl"
                  >
                     {/* Using Hill Country / Tea Trails image */}
-                    <img src="/about/country.jpg" className="w-full h-full object-cover" alt="Sri Lanka Landscape" />
+                    <img src="/about/country.webp" className="w-full h-full object-cover" alt="Sri Lanka Landscape" />
                  </motion.div>
                  <motion.div variants={scaleUp} whileHover={{ scale: 1.05 }} className="h-48 rounded-xl overflow-hidden shadow-lg">
                     {/* Using Waves/Beach image */}
-                    <img src="/about/waves.jpg" className="w-full h-full object-cover" alt="Beach" />
+                    <img src="/about/waves.webp" className="w-full h-full object-cover" alt="Beach" />
                  </motion.div>
                  <motion.div variants={scaleUp} whileHover={{ scale: 1.05 }} className="h-48 rounded-xl overflow-hidden shadow-lg">
                     {/* Using Adventure/Wildlife image */}
-                    <img src="/about/adventuree.jpg" className="w-full h-full object-cover" alt="Wildlife" />
+                    <img src="/about/adventuree.webp" className="w-full h-full object-cover" alt="Wildlife" />
                  </motion.div>
               </div>
             </motion.div>
@@ -139,7 +139,7 @@ export default function AboutPage() {
                   transition={{ duration: 1.2, ease: "easeOut" }}
                   viewport={{ once: true }}
                   // Using Ancient Wonders / Culture image
-                  src="/about/vision.jpg" 
+                  src="/about/vision.webp" 
                   alt="Visionary Travel" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
@@ -190,7 +190,7 @@ export default function AboutPage() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
                   // Using Luxury Signature image
-                  src="/about/safe.jpg" 
+                  src="/about/safe.webp" 
                   className="w-full h-full object-cover" 
                   alt="Safe Travel" 
                 />
@@ -210,7 +210,7 @@ export default function AboutPage() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
                   // Using Luxury Signature image
-                  src="/about/safee.jpg" 
+                  src="/about/safee.webp" 
                   className="w-full h-full object-cover" 
                   alt="Safe Travel" 
                 />
