@@ -14,19 +14,50 @@ const LOCATIONS = [
 
 const VEHICLES = {
   Car: [
-    { name: "Wagon R", image: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800&auto=format&fit=crop" },
-    { name: "Fit Shuttle", image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" },
-    { name: "Prado", image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=800&auto=format&fit=crop" },
-    { name: "Vitz", image: "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=800&auto=format&fit=crop" },
-    { name: "Vezel", image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop" },
-  ],
+  {
+    name: "Wagon R",
+    // Ensure 'wagon-r.jpg' exists in public/vehicles/cars/
+    image: "/vehicles/cars/wagon-r.jpg"
+  },
+  {
+    name: "Fit Shuttle",
+    image: "/vehicles/cars/fit-shuttle.jpg"
+  },
+  {
+    name: "Prado",
+    image: "/vehicles/cars/prado.jpg"
+  },
+  {
+    name: "Vitz",
+    image: "/vehicles/cars/vitz.jpg"
+  },
+  {
+    name: "Vezel",
+    image: "/vehicles/cars/vezel.jpg"
+  },
+],
   Van: [
-    { name: "KDH", image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?q=80&w=800&auto=format&fit=crop" },
-    { name: "Caravan", image: "https://images.unsplash.com/photo-1623963261596-3c483a37b370?q=80&w=800&auto=format&fit=crop" },
-    { name: "Super GL", image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?q=80&w=800&auto=format&fit=crop" },
-    { name: "Spacia", image: "https://images.unsplash.com/photo-1605218427306-633ba81119b8?q=80&w=800&auto=format&fit=crop" },
-    { name: "Every Van", image: "https://images.unsplash.com/photo-1628864035659-1e33d45e6912?q=80&w=800&auto=format&fit=crop" },
-  ]
+  { 
+    name: "KDH", 
+    image: "/vehicles/vans/kdh.jpg" 
+  },
+  { 
+    name: "Caravan", 
+    image: "/vehicles/vans/caravan.jpg" 
+  },
+  { 
+    name: "Super GL", 
+    image: "/vehicles/vans/super-gl.jpg" 
+  },
+  { 
+    name: "Spacia", 
+    image: "/vehicles/vans/spacia.jpg" 
+  },
+  { 
+    name: "Every Van", 
+    image: "/vehicles/vans/every-van.jpg" 
+  },
+],
 };
 
 // --- ANIMATION VARIANTS ---

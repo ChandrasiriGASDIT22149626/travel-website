@@ -31,12 +31,12 @@ const Footer = () => {
       {/* --- BACKGROUND IMAGE & OVERLAY --- */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?q=80&w=2070&auto=format&fit=crop" 
+          src="/collections/seaa.jpg"
           alt="Footer Background" 
           className="w-full h-full object-cover"
         />
         {/* Dark Overlay for Readability */}
-        <div className="absolute inset-0 bg-black/90"></div> 
+        <div className="absolute inset-0 bg-black/70"></div> 
       </div>
 
       {/* --- FOOTER CONTENT --- */}

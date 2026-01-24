@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 
 // --- DATA ARRAY (UNCHANGED) ---
 const packages = [
+
   {
     id: 1,
     title: "GOLDEN TRIANGLE & CULTURAL TREASURES",
@@ -14,7 +15,7 @@ const packages = [
     destinations: "03 Destinations",
     desc: "Discover Sri Lanka’s rich cultural heritage with historic landmarks and traditions.",
     link: "/tour-packages/cultural-express",
-    image: "https://plus.unsplash.com/premium_photo-1730145749791-28fc538d7203?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/cultural-express.jpg" // Updated to local
   },
   {
     id: 2,
@@ -23,7 +24,7 @@ const packages = [
     destinations: "07 Destinations",
     desc: "Perfect for thrill seekers—safaris, hikes, and nature expeditions await.",
     link: "/tour-packages/adventure-tours",
-    image: "https://images.unsplash.com/photo-1766391239181-445a3951671a?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/hill-country.jpg" // Updated to local
   },
   {
     id: 3,
@@ -32,7 +33,7 @@ const packages = [
     destinations: "07 Destinations",
     desc: "A premium tour combining luxury with iconic sights and authentic experiences.",
     link: "/tour-packages/classic-deluxe",
-    image: "https://images.unsplash.com/photo-1508817628294-5a453fa0b8fb?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/waves-wildlife.jpg" // Updated to local
   },
   {
     id: 4,
@@ -41,7 +42,7 @@ const packages = [
     destinations: "08 Destinations",
     desc: "Relax on golden beaches and enjoy coastal adventures with stunning sunsets.",
     link: "/tour-packages/beach-splash",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/luxury-signature.jpg" // Updated to local
   },
   {
     id: 5,
@@ -50,7 +51,7 @@ const packages = [
     destinations: "04 Destinations",
     desc: "The ultimate Sri Lanka experience—covering all major cultural and natural wonders.",
     link: "/tour-packages/grand-classic",
-    image: "https://images.unsplash.com/photo-1620619767323-b95a89183081?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/ancient-wonders.jpg" // Updated to local
   },
   {
     id: 6,
@@ -59,7 +60,7 @@ const packages = [
     destinations: "05 Destinations",
     desc: "Explore national parks, wildlife safaris, and breathtaking natural landscapes.",
     link: "/tour-packages/wildlife-nature",
-    image: "https://plus.unsplash.com/premium_photo-1664298390253-3dd30d1d034d?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/adventure.jpg" // Updated to local
   },
   {
     id: 7,
@@ -68,7 +69,7 @@ const packages = [
     destinations: "05 Destinations",
     desc: "A dreamy getaway with romantic beaches, hills, and scenic escapes.",
     link: "/tour-packages/romantic-gateway",
-    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/honeymoon.jpg" // Updated to local
   },
   {
     id: 8,
@@ -77,7 +78,7 @@ const packages = [
     destinations: "06 Destinations",
     desc: "Rejuvenate with Ayurveda treatments and peaceful retreats across Sri Lanka.",
     link: "/tour-packages/wellness-ayurvedic",
-    image: "https://images.unsplash.com/photo-1734279135113-8bd58bc02b69?q=80&w=800&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1734279135113-8bd58bc02b69?q=80&w=800&auto=format&fit=crop" // KEPT UNCHANGED
   },
   {
     id: 9,
@@ -86,7 +87,7 @@ const packages = [
     destinations: "08 Destinations",
     desc: "Follow the Ramayana trail visiting sacred temples and legendary sites.",
     link: "/tour-packages/ramayana-tour",
-    image: "https://images.unsplash.com/photo-1576487248805-cf45f6bcc67f?q=80&w=800&auto=format&fit=crop"
+    image: "/tours/ramayana.jpg" // Updated to local
   }
 ];
 

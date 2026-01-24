@@ -15,13 +15,13 @@ const testimonials = [
     name: "Charlotte",
     country: "United Kingdom",
     text: "Had a magical trip to Sri Lanka with over 1,000 photos and a fantastic 20-minute film made by our son. Smooth, hassle-free holiday with a perfect guide. Highly recommended!",
-    img: "https://images.unsplash.com/photo-1539576776193-2c07122e5fee?auto=format&fit=crop&q=80&w=1000"
+    img: "/feedback/background.jpg"
   },
   {
     name: "James & Sarah",
     country: "Australia",
     text: "The diversity of this island is breathtaking. From the misty tea hills of Ella to the sunny beaches of Mirissa, every moment was perfectly planned. Our driver was exceptional.",
-    img: "https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?auto=format&fit=crop&q=80&w=1000"
+    img: "/feedback/header.jpg"
   },
   {
     name: "Elena",
@@ -131,14 +131,65 @@ export default function Home() {
   const [testimonialIndex, setTestimonialIndex] = useState(0); // State for testimonials
   const router = useRouter();
 
-  const slides = [
-    { id: 1, subtitle: "Ancient Fortress", title: "SIGIRIYA", desc: "Explore the majestic Lion Rock, an ancient fortress built on a giant column of rock.", img: "https://images.unsplash.com/photo-1539576776193-2c07122e5fee?q=80&w=2670&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Sigiriya+Sri+Lanka" },
-    { id: 2, subtitle: "Hill Country", title: "ELLA", desc: "Walk along the Nine Arches Bridge and immerse yourself in the misty tea plantations.", img: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?q=80&w=2670&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Ella+Sri+Lanka" },
-    { id: 3, subtitle: "Coastal Bliss", title: "MIRISSA", desc: "Relax on golden sands and witness the majestic blue whales in the Indian Ocean.", img: "https://images.unsplash.com/photo-1544750040-4ea9b8a27d38?q=80&w=2670&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Mirissa+Sri+Lanka" },
-    { id: 4, subtitle: "Sacred City", title: "KANDY", desc: "Visit the Temple of the Tooth Relic and experience the rich culture of the hill capital.", img: "https://images.unsplash.com/photo-1665849050332-8d5d7e59afb6?q=80&w=2670&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Kandy+Sri+Lanka" },
-    { id: 5, subtitle: "Endless blue horizons", title: "SEA", desc: "Relax by the crystal clear waters and pristine beaches of the island.", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2670&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Negombo" },
-    { id: 6, subtitle: "Where history stands strong", title: "Galle Fort", desc: "Walk through the cobblestone streets of this UNESCO World Heritage site.", img: "https://images.unsplash.com/photo-1509982724584-2ce0d4366d8b?q=80&w=2670&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Galle" },
-  ];
+  const slides = 
+  [
+  { 
+    id: 1, 
+    subtitle: "Ancient Fortress", 
+    title: "SIGIRIYA", 
+    desc: "Explore the majestic Lion Rock, an ancient fortress built on a giant column of rock.", 
+    img: "https://images.unsplash.com/photo-1539576776193-2c07122e5fee?q=80&w=2670&auto=format&fit=crop", 
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Sigiriya+Sri+Lanka" 
+  },
+  { 
+    id: 2, 
+    subtitle: "Hill Country", 
+    title: "ELLA", 
+    desc: "Walk along the Nine Arches Bridge and immerse yourself in the misty tea plantations.", 
+    img: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?q=80&w=2670&auto=format&fit=crop",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Ella" 
+  },
+  { 
+    id: 3, 
+    subtitle: "Coastal Bliss", 
+    title: "MIRISSA", 
+    desc: "Relax on golden sands and witness the majestic blue whales in the Indian Ocean.", 
+    img: "/collections/mirissa.jpg", 
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Mirissa+Sri+Lanka" 
+  },
+  { 
+    id: 4, 
+    subtitle: "Sacred City", 
+    title: "KANDY", 
+    desc: "Visit the Temple of the Tooth Relic and experience the rich culture of the hill capital.", 
+    img: "/collections/kandy.jpg", 
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Kandy+Sri+Lanka" 
+  },
+  { 
+    id: 5, 
+    subtitle: "Endless blue horizons", 
+    title: "SEA", 
+    desc: "Relax by the crystal clear waters and pristine beaches of the island.", 
+    img: "/collections/sea.jpg", 
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Negombo" 
+  },
+  { 
+    id: 6, 
+    subtitle: "Where history stands strong", 
+    title: "Galle Fort", 
+    desc: "Walk through the cobblestone streets of this UNESCO World Heritage site.", 
+    img: "https://images.unsplash.com/photo-1509982724584-2ce0d4366d8b?q=80&w=2670&auto=format&fit=crop",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Galle Fort" 
+  },
+  { 
+    id: 7, 
+    subtitle: "Where history stands strong", 
+    title: "Yala", 
+    desc: "Walk through the cobblestone streets of this UNESCO World Heritage site.", 
+    img: "/collections/yala.jpg", 
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Yala" 
+  },
+];
 
   // --- AUTO SLIDER LOGIC ---
   useEffect(() => {
@@ -167,16 +218,17 @@ export default function Home() {
 
       {/* --- HERO SECTION --- */}
       <div className="relative h-screen w-full bg-black text-white">
-        <AnimatePresence mode='wait'>
-          <motion.div
-            key={currentSlide.id}
-            initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}
-            className="absolute inset-0 z-0"
-          >
-            <div className="absolute inset-0 bg-black/40 z-10" />
-            <img src={currentSlide.img} alt={currentSlide.title} className="w-full h-full object-cover" />
-          </motion.div>
-        </AnimatePresence>
+        
+        {/* UPDATED: Removed AnimatePresence & motion props. 
+            The image now switches instantly without the fade-to-black animation. */}
+        <div className="absolute inset-0 z-0">
+           <div className="absolute inset-0 bg-black/40 z-10" />
+           <img 
+             src={currentSlide.img} 
+             alt={currentSlide.title} 
+             className="w-full h-full object-cover" 
+           />
+        </div>
 
         <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end h-full pb-24">
@@ -197,6 +249,7 @@ export default function Home() {
                   return (
                     <motion.div key={slide.id} initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: index * 0.1 }} onClick={() => setCurrentIndex(index)} className="w-48 h-64 rounded-2xl overflow-hidden relative cursor-pointer group border border-white/20 shadow-2xl flex-shrink-0 hover:border-blue-500 transition-colors">
                       <img src={slide.img} alt={slide.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                      {/* Optional: Removed 'transition-colors' from here if you wanted the thumbnails static too, but kept for now as usually desired */}
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors" />
                       <div className="absolute bottom-4 left-4 text-white"><p className="text-xs font-bold uppercase tracking-widest text-gray-300">{slide.subtitle}</p><h4 className="text-xl font-bold">{slide.title}</h4></div>
                     </motion.div>
@@ -207,7 +260,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {/* --- HANDPICKED TOURS --- */}
       <section className="py-24 container mx-auto px-6 bg-white">
         <div className="text-center mb-16">

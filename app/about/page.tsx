@@ -1,12 +1,11 @@
 'use client'; 
 import React from 'react';
 import { motion, Variants } from 'framer-motion'; 
-import { ArrowRight, Send, Mail, Phone, Youtube, Instagram, Facebook, Twitter } from 'lucide-react';
+import { ArrowRight } from 'lucide-react'; // Cleaned up unused imports
 import Header from '@/components/Header';
 
 // --- ANIMATION VARIANTS ---
 
-// Fade Up with Spring Physics
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 60 },
   visible: { 
@@ -16,7 +15,6 @@ const fadeInUp: Variants = {
   }
 };
 
-// Stagger Container (Children appear one by one)
 const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -28,7 +26,6 @@ const staggerContainer: Variants = {
   }
 };
 
-// Scale Up Animation for Images
 const scaleUp: Variants = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: { 
@@ -43,19 +40,18 @@ export default function AboutPage() {
     <div className="relative min-h-screen font-sans text-slate-900 overflow-x-hidden">
       <Header />
 
-      {/* ================= BACKGROUND IMAGE ================= */}
-      {/* Fixed background that stays in place while you scroll */}
+      {/* ================= BACKGROUND IMAGE (Updated to Local) ================= */}
       <div 
         className="fixed inset-0 z-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: `url('https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=2574&auto=format&fit=crop')` 
+          // Using the Cultural/Sigiriya image for the main background
+          backgroundImage: `url('/tours/cultural-express.jpg')` 
         }}
       >
-        {/* Light Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-white/90"></div>
       </div>
 
-      {/* ================= CONTENT (Relative z-10 to sit on top) ================= */}
+      {/* ================= CONTENT ================= */}
       <div className="relative z-10">
         
         {/* --- HERO SECTION --- */}
@@ -80,20 +76,23 @@ export default function AboutPage() {
                 </motion.p>
               </div>
 
-              {/* Asymmetric Image Grid with Hover Scale */}
+              {/* Asymmetric Image Grid (Updated to Local) */}
               <div className="lg:w-1/2 grid grid-cols-2 gap-4">
                  <motion.div 
                    variants={scaleUp}
                    whileHover={{ scale: 1.02 }}
                    className="col-span-2 h-80 rounded-xl overflow-hidden shadow-2xl"
                  >
-                    <img src="https://images.unsplash.com/photo-1539576776193-2c07122e5fee?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover" alt="Sri Lanka" />
+                    {/* Using Hill Country / Tea Trails image */}
+                    <img src="/about/country.jpg" className="w-full h-full object-cover" alt="Sri Lanka Landscape" />
                  </motion.div>
                  <motion.div variants={scaleUp} whileHover={{ scale: 1.05 }} className="h-48 rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Beach" />
+                    {/* Using Waves/Beach image */}
+                    <img src="/about/waves.jpg" className="w-full h-full object-cover" alt="Beach" />
                  </motion.div>
                  <motion.div variants={scaleUp} whileHover={{ scale: 1.05 }} className="h-48 rounded-xl overflow-hidden shadow-lg">
-                    <img src="https://plus.unsplash.com/premium_photo-1680132275008-fd7988d585ad?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Wildlife" />
+                    {/* Using Adventure/Wildlife image */}
+                    <img src="/about/adventuree.jpg" className="w-full h-full object-cover" alt="Wildlife" />
                  </motion.div>
               </div>
             </motion.div>
@@ -132,14 +131,15 @@ export default function AboutPage() {
                 </div>
               </motion.div>
 
-              {/* Right Image */}
+              {/* Right Image (Updated to Local) */}
               <div className="relative h-[500px] w-full bg-gray-900 rounded-lg overflow-hidden">
                  <motion.img 
                   initial={{ scale: 1.1, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 0.8 }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
                   viewport={{ once: true }}
-                  src="https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?q=80&w=2574&auto=format&fit=crop" 
+                  // Using Ancient Wonders / Culture image
+                  src="/about/vision.jpg" 
                   alt="Visionary Travel" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
@@ -167,7 +167,7 @@ export default function AboutPage() {
               </h2>
             </motion.div>
 
-            {/* Service Item 1 */}
+            {/* Service Item 1: Safe & Comfortable (Updated to Local) */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
@@ -189,14 +189,15 @@ export default function AboutPage() {
                 <motion.img 
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
-                  src="https://images.unsplash.com/photo-1566371486490-560ded23b5e4?q=80&w=2670&auto=format&fit=crop" 
+                  // Using Luxury Signature image
+                  src="/about/safe.jpg" 
                   className="w-full h-full object-cover" 
                   alt="Safe Travel" 
                 />
               </div>
             </motion.div>
 
-            {/* Service Item 2 */}
+            {/* Service Item 2: Personalized Packages (LINK KEPT AS REQUESTED) */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
@@ -208,9 +209,10 @@ export default function AboutPage() {
                  <motion.img 
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
-                  src="https://plus.unsplash.com/premium_photo-1679619558250-41fa96ef187c?q=80&w=2574&auto=format&fit=crop" 
+                  // Using Luxury Signature image
+                  src="/about/safee.jpg" 
                   className="w-full h-full object-cover" 
-                  alt="Personalized" 
+                  alt="Safe Travel" 
                 />
               </div>
               <div>
@@ -260,7 +262,6 @@ export default function AboutPage() {
             </motion.div>
           </div>
         </section>
-
 
       </div>
     </div>
