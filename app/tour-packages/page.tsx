@@ -1,13 +1,12 @@
 'use client'; 
 import React from 'react';
-import { motion, Variants } from 'framer-motion'; 
-import { ArrowRight, MapPin, Calendar, MousePointer2 } from 'lucide-react';
+import { motion } from 'framer-motion'; 
+import { ArrowRight, MapPin, Calendar, Star, Compass } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// --- DATA ARRAY (UNCHANGED) ---
+// --- DATA ARRAY (Unchanged) ---
 const packages = [
-
   {
     id: 1,
     title: "GOLDEN TRIANGLE & CULTURAL TREASURES",
@@ -15,7 +14,9 @@ const packages = [
     destinations: "03 Destinations",
     desc: "Discover Sri Lanka’s rich cultural heritage with historic landmarks and traditions.",
     link: "/tour-packages/cultural-express",
-    image: "/tours/cultural-express.jpg" // Updated to local
+    image: "/tours/cultural-express.jpg",
+    tag: "Best Seller",
+    color: "from-orange-400 to-red-500"
   },
   {
     id: 2,
@@ -24,7 +25,9 @@ const packages = [
     destinations: "07 Destinations",
     desc: "Perfect for thrill seekers—safaris, hikes, and nature expeditions await.",
     link: "/tour-packages/adventure-tours",
-    image: "/tours/hill-country.jpg" // Updated to local
+    image: "/tours/hill-country.jpg",
+    tag: "Adventure",
+    color: "from-green-400 to-emerald-600"
   },
   {
     id: 3,
@@ -33,7 +36,9 @@ const packages = [
     destinations: "07 Destinations",
     desc: "A premium tour combining luxury with iconic sights and authentic experiences.",
     link: "/tour-packages/classic-deluxe",
-    image: "/tours/waves-wildlife.jpg" // Updated to local
+    image: "/tours/waves-wildlife.jpg",
+    tag: "Popular",
+    color: "from-blue-400 to-cyan-500"
   },
   {
     id: 4,
@@ -42,7 +47,8 @@ const packages = [
     destinations: "08 Destinations",
     desc: "Relax on golden beaches and enjoy coastal adventures with stunning sunsets.",
     link: "/tour-packages/beach-splash",
-    image: "/tours/luxury-signature.jpg" // Updated to local
+    image: "/tours/luxury-signature.jpg",
+    color: "from-purple-400 to-pink-500"
   },
   {
     id: 5,
@@ -51,7 +57,8 @@ const packages = [
     destinations: "04 Destinations",
     desc: "The ultimate Sri Lanka experience—covering all major cultural and natural wonders.",
     link: "/tour-packages/grand-classic",
-    image: "/tours/ancient-wonders.jpg" // Updated to local
+    image: "/tours/ancient-wonders.jpg",
+    color: "from-amber-400 to-orange-500"
   },
   {
     id: 6,
@@ -60,7 +67,8 @@ const packages = [
     destinations: "05 Destinations",
     desc: "Explore national parks, wildlife safaris, and breathtaking natural landscapes.",
     link: "/tour-packages/wildlife-nature",
-    image: "/tours/adventure.jpg" // Updated to local
+    image: "/tours/adventure.jpg",
+    color: "from-lime-400 to-green-500"
   },
   {
     id: 7,
@@ -69,7 +77,8 @@ const packages = [
     destinations: "05 Destinations",
     desc: "A dreamy getaway with romantic beaches, hills, and scenic escapes.",
     link: "/tour-packages/romantic-gateway",
-    image: "/tours/honeymoon.jpg" // Updated to local
+    image: "/tours/honeymoon.jpg",
+    color: "from-rose-400 to-pink-600"
   },
   {
     id: 8,
@@ -78,7 +87,8 @@ const packages = [
     destinations: "06 Destinations",
     desc: "Rejuvenate with Ayurveda treatments and peaceful retreats across Sri Lanka.",
     link: "/tour-packages/wellness-ayurvedic",
-    image: "https://images.unsplash.com/photo-1734279135113-8bd58bc02b69?q=80&w=800&auto=format&fit=crop" // KEPT UNCHANGED
+    image: "https://images.unsplash.com/photo-1734279135113-8bd58bc02b69?q=80&w=800&auto=format&fit=crop",
+    color: "from-teal-400 to-green-500"
   },
   {
     id: 9,
@@ -87,166 +97,182 @@ const packages = [
     destinations: "08 Destinations",
     desc: "Follow the Ramayana trail visiting sacred temples and legendary sites.",
     link: "/tour-packages/ramayana-tour",
-    image: "/tours/ramayana.jpg" // Updated to local
+    image: "/tours/ramayana.jpg",
+    color: "from-indigo-400 to-violet-600"
   }
 ];
 
-// --- ANIMATION VARIANTS ---
-const textVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.8, ease: "easeOut" } 
-  }
-};
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    }
-  }
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { type: "spring", stiffness: 50, damping: 20 } 
-  }
-};
-
 export default function TourPackages() {
   return (
-    <div className="relative min-h-screen font-sans bg-slate-900">
+    <div className="relative min-h-screen font-sans bg-white text-slate-900 overflow-hidden">
       <Header />
 
-      {/* --- FIXED BACKGROUND (Parallax Effect) --- */}
-      <div className="fixed inset-0 w-full h-full -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-slate-900/90 z-10" />
-        <img 
-          src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=2670&auto=format&fit=crop" 
-          alt="Sri Lanka Travel"
-          className="w-full h-full object-cover scale-105"
-        />
+      {/* --- BACKGROUND DECORATION (Colorful Blobs) --- */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-100 rounded-full blur-[100px] opacity-60" />
+        <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-yellow-50 rounded-full blur-[100px] opacity-60" />
+        <div className="absolute bottom-[10%] right-[0%] w-[400px] h-[400px] bg-pink-50 rounded-full blur-[100px] opacity-60" />
       </div>
 
       <div className="relative z-10">
         
-        {/* --- HERO SECTION --- */}
-        <section className="h-[70vh] flex flex-col items-center justify-center text-center px-4 relative">
+        {/* --- HERO SECTION WITH BACKGROUND IMAGE --- */}
+        <section className="relative min-h-[70vh] flex flex-col items-center justify-center text-center px-4 pt-40 pb-20 overflow-hidden">
+          
+          {/* BACKGROUND IMAGE LAYER */}
+          <div className="absolute inset-0 z-0">
+            {/* Make sure you have 'background.jpg' in public/tours/ */}
+            <img 
+              src="/tours/background.jpg" 
+              alt="Sri Lanka Background" 
+              className="w-full h-full object-cover"
+            />
+            {/* White Gradient Overlay: Fades from transparent (top) to white (bottom) to blend into the page */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white"></div>
+          </div>
+
+          {/* CONTENT LAYER */}
           <motion.div
-            initial="hidden"
-            animate="visible"
-            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative z-10 max-w-5xl mx-auto"
           >
-            <motion.span 
-              variants={textVariants}
-              className="inline-block py-1 px-3 rounded-full bg-blue-600/30 border border-blue-400/30 text-blue-200 text-sm font-semibold tracking-wider uppercase mb-6 backdrop-blur-sm"
-            >
-              Explore the Wonder of Asia
-            </motion.span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur border border-white text-slate-600 text-sm font-bold tracking-widest uppercase mb-6 shadow-sm">
+              <Compass size={16} className="text-orange-500" /> Discover Sri Lanka
+            </div>
             
-            <motion.h1 
-              variants={textVariants}
-              className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-2xl"
-            >
-              Curated Journeys <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-emerald-300">
-                Unforgettable Memories
+            <h1 className="text-6xl md:text-8xl font-black text-slate-900 mb-8 tracking-tighter leading-none drop-shadow-sm">
+              Find Your <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 animate-gradient-x">
+                Perfect Adventure
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p 
-              variants={textVariants}
-              className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light leading-relaxed drop-shadow-md"
+            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto font-light leading-relaxed mb-12">
+              We have curated the finest experiences just for you. Scroll down to begin your journey through the wonder of Asia.
+            </p>
+
+            <motion.div 
+              animate={{ y: [0, 10, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="flex flex-col items-center gap-2 text-slate-500"
             >
-              From the misty hills of Ella to the golden coasts of Mirissa, choose a package that speaks to your soul.
-            </motion.p>
-          </motion.div>
-
-          {/* Scroll Down Indicator */}
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2"
-          >
-            <span className="text-xs uppercase tracking-widest"></span>
-            <div className="w-px h-12 bg-gradient-to-b from-white to-transparent"></div>
+              <span className="text-xs uppercase tracking-widest font-bold">Explore Packages</span>
+              <ArrowRight className="rotate-90 text-slate-900" />
+            </motion.div>
           </motion.div>
         </section>
 
-        {/* --- PACKAGES GRID SECTION --- */}
-        <section className="container mx-auto px-6 pb-24 -mt-10">
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {packages.map((pkg) => (
-              <motion.div
+        {/* --- FEATURED SECTION (Zig-Zag Layout) --- */}
+        <section className="container mx-auto px-6 pb-24">
+          <div className="space-y-32">
+            {packages.slice(0, 3).map((pkg, index) => (
+              <motion.div 
                 key={pkg.id}
-                variants={cardVariants}
-                className="group relative bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-blue-900/20 transition-all duration-500 hover:-translate-y-2"
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-24 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
               >
-                {/* Image Container */}
-                <div className="relative h-64 overflow-hidden">
-                  <motion.img 
-                    src={pkg.image} 
-                    alt={pkg.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Gradient Overlay on Image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-                  
-                  {/* Floating Badges */}
-                  <div className="absolute top-4 left-4 flex flex-col gap-2">
-                    <span className="bg-white/90 backdrop-blur text-slate-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
-                      <Calendar size={12} className="text-blue-600" /> {pkg.duration}
+                {/* Image Side */}
+                <div className="w-full lg:w-1/2 relative group">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${pkg.color} rounded-[3rem] transform rotate-3 scale-105 opacity-20 group-hover:rotate-6 transition-transform duration-500`}></div>
+                  <div className="relative h-[400px] lg:h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
+                    <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  </div>
+                  {/* Floating Tag */}
+                  <div className="absolute top-8 -left-4 bg-white py-3 px-6 rounded-r-full shadow-lg border-l-4 border-slate-900">
+                    <span className="font-bold text-slate-900 uppercase tracking-widest text-sm flex items-center gap-2">
+                      <Star size={16} className="text-yellow-500 fill-yellow-500" /> {pkg.tag}
                     </span>
                   </div>
                 </div>
 
-                {/* Content Container */}
-                <div className="p-8 flex flex-col h-[calc(100%-16rem)]">
-                  <div className="mb-4">
-                    <span className="flex items-center gap-1 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">
-                      <MapPin size={14} /> {pkg.destinations}
+                {/* Text Side */}
+                <div className="w-full lg:w-1/2 text-center lg:text-left">
+                  <h3 className={`text-sm font-bold bg-gradient-to-r ${pkg.color} bg-clip-text text-transparent uppercase tracking-widest mb-4`}>
+                    0{index + 1} Featured Tour
+                  </h3>
+                  <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 leading-tight">
+                    {pkg.title}
+                  </h2>
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
+                    <span className="px-4 py-2 bg-slate-100 rounded-lg text-slate-700 font-bold text-sm flex items-center gap-2">
+                      <Calendar size={16} /> {pkg.duration}
                     </span>
-                    <h3 className="text-2xl font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
-                      {pkg.title}
-                    </h3>
+                    <span className="px-4 py-2 bg-slate-100 rounded-lg text-slate-700 font-bold text-sm flex items-center gap-2">
+                      <MapPin size={16} /> {pkg.destinations}
+                    </span>
                   </div>
-
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                  <p className="text-slate-600 text-lg leading-relaxed mb-10">
                     {pkg.desc}
                   </p>
-
-                  <div className="pt-6 border-t border-slate-100 flex items-center justify-between mt-auto">
-                    <a 
-                      href={pkg.link} 
-                      className="group/btn flex items-center gap-2 text-slate-900 font-bold text-sm uppercase tracking-wider hover:text-blue-600 transition-colors"
-                    >
-                      View Details 
-                      <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
-                    </a>
-                  </div>
+                  <a href={pkg.link}>
+                    <button className={`px-10 py-4 rounded-full bg-slate-900 text-white font-bold uppercase tracking-widest hover:bg-gradient-to-r ${pkg.color} transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1`}>
+                     Explore this tour
+                    </button>
+                  </a>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </section>
+
+        {/* --- THE COLLECTION (Grid Layout) --- */}
+        <section className="bg-slate-50 py-32 rounded-t-[4rem] relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden pointer-events-none">
+             <div className="absolute top-[10%] left-[10%] text-[20rem] font-black text-slate-200 opacity-20 select-none">TOURS</div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-4">More Adventures</h2>
+              <p className="text-slate-500 text-xl max-w-2xl mx-auto">Explore our diverse collection of tailored experiences.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {packages.slice(3).map((pkg) => (
+                <motion.div
+                  key={pkg.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ y: -10 }}
+                  className="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100"
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-900">
+                      {pkg.duration}
+                    </div>
+                  </div>
+                  
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                      {pkg.title}
+                    </h3>
+                    <p className="text-slate-500 text-sm mb-6 line-clamp-3">
+                      {pkg.desc}
+                    </p>
+                    <a href={pkg.link} className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-900 group-hover:text-blue-600 transition-colors">
+                      Explore this tour <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    </a>
+                  </div>
+                  {/* Colorful Bottom Bar */}
+                  <div className={`h-2 w-full bg-gradient-to-r ${pkg.color}`}></div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </div>
       
-      
+     
     </div>
   );
 }

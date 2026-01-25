@@ -1,7 +1,8 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion'; 
-import { MapPin, Calendar, Star, Info } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion'; 
+import { MapPin, Calendar, Star, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -45,7 +46,7 @@ const destinations = [
     bestTime: "February - July",
     highlights: ["Leopards", "Elephants", "Safari Camping"],
     desc: "Yala combines a strict nature reserve with a national park. Divided into 5 blocks, the park has a protected area of nearly 130,000 hectares of land consisting of light forests, scrubs, grasslands, tanks, and lagoons. It is best known for its variety of wild animals and is important for the conservation of Sri Lankan elephants, Sri Lankan leopards, and aquatic birds.", 
-    img: "https://images.unsplash.com/photo-1625633857639-6ee39174955c?q=80&w=2574&auto=format&fit=crop" 
+    img: "/collections/yala.jpg"
   },
   { 
     title: "Kandy", 
@@ -53,23 +54,7 @@ const destinations = [
     bestTime: "December - April",
     highlights: ["Temple of the Tooth", "Kandy Lake", "Botanical Gardens"],
     desc: "Kandy is a large city in central Sri Lanka. It's set on a plateau surrounded by mountains, which are home to tea plantations and biodiverse rainforest. The city's heart is scenic Kandy Lake (Bogambara Lake). Kandy is famous for the Temple of the Tooth (Sri Dalada Maligawa), one of the most sacred places of worship in the Buddhist world.", 
-    img: "https://images.unsplash.com/photo-1625413182602-0c9a59b02a21?q=80&w=2574&auto=format&fit=crop" 
-  },
-  { 
-    title: "Nuwara Eliya", 
-    region: "Central Province",
-    bestTime: "February - May",
-    highlights: ["Gregory Lake", "Tea Factories", "Victoria Park"],
-    desc: "Often referred to as 'Little England', this genteel highland community does have a rose-tinted, vaguely British-country-village feel to it, with its colonial-era bungalows, Tudor-style hotels, well-tended hedgerows, and pretty gardens. It is the heart of the tea industry in Sri Lanka.", 
-    img: "https://images.unsplash.com/photo-1598516802613-207d72242133?q=80&w=2574&auto=format&fit=crop" 
-  },
-  { 
-    title: "Polonnaruwa", 
-    region: "North Central",
-    bestTime: "May - September",
-    highlights: ["Gal Vihara", "Royal Palace", "Parakrama Samudra"],
-    desc: "Polonnaruwa was the second capital of Sri Lanka after the destruction of Anuradhapura in 993. It comprises, besides the Brahmanic monuments built by the Cholas, the monumental ruins of the fabulous garden-city created by Parakramabahu I in the 12th century.", 
-    img: "https://images.unsplash.com/photo-1606213766668-0720d2d32890?q=80&w=2671&auto=format&fit=crop" 
+    img:"/collections/kandy.jpg"
   },
   { 
     title: "Arugam Bay", 
@@ -77,7 +62,7 @@ const destinations = [
     bestTime: "May - September",
     highlights: ["Surfing", "Lagoon Safari", "Elephant Rock"],
     desc: "Arugam Bay is known as one of the best surf spots in the world. It is a moon-shaped curl of soft sand, home to a legendary point break that many regard as the best surf spot in the country. It's a tiny place, with a pop-up vibe and a very relaxed atmosphere.", 
-    img: "https://images.unsplash.com/photo-1491752706342-d6b334b3dc04?q=80&w=2670&auto=format&fit=crop" 
+    img: "/tours/background.jpg"
   },
   { 
     title: "Horton Plains", 
@@ -85,7 +70,7 @@ const destinations = [
     bestTime: "January - March",
     highlights: ["World's End", "Baker's Falls", "Sambar Deer"],
     desc: "Horton Plains National Park is a protected area in the central highlands of Sri Lanka and is covered by montane grassland and cloud forest. This plateau at an altitude of 2,100–2,300 metres is rich in biodiversity and many species found here are endemic to the region.", 
-    img: "https://images.unsplash.com/photo-1593026315233-a3674d688049?q=80&w=2670&auto=format&fit=crop" 
+    img: "/about/hortonplains.jpg"
   },
   { 
     title: "Trincomalee", 
@@ -93,19 +78,28 @@ const destinations = [
     bestTime: "May - October",
     highlights: ["Nilaveli Beach", "Koneswaram Temple", "Pigeon Island"],
     desc: "Trincomalee is a port city on the northeast coast of Sri Lanka. Set on a peninsula, Fort Frederick was built by the Portuguese in the 17th century. Within its grounds, the grand Koneswaram Temple stands on Swami Rock cliff, a popular vantage point for blue-whale watching.", 
-    img: "https://images.unsplash.com/photo-1580802102875-139367fb379c?q=80&w=2670&auto=format&fit=crop" 
+    img: "/about/trinco.jpg"
   },
-  { 
-    title: "Adam's Peak", 
-    region: "Sabaragamuwa",
-    bestTime: "December - May",
-    highlights: ["Sunrise View", "Sacred Footprint", "Hiking"],
-    desc: "Adam's Peak is a 2,243 m tall conical mountain located in central Sri Lanka. It is well known for the Sri Pada, i.e., 'sacred footprint', a 1.8 m rock formation near the summit, which in Buddhist tradition is held to be the footprint of the Buddha.", 
-    img: "https://images.unsplash.com/photo-1460378377930-38815f20a4b6?q=80&w=2574&auto=format&fit=crop" 
-  }
 ];
 
 export default function CollectionsPage() {
+  const router = useRouter();
+  const [showButton, setShowButton] = useState(false);
+
+  // Scroll Event Listener
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-900 font-sans text-white">
       <Header />
@@ -150,7 +144,6 @@ export default function CollectionsPage() {
             key={idx} 
             className="relative min-h-screen flex items-center justify-center py-24 overflow-hidden"
           >
-            {/* Background Image with Parallax-like Fixed feel can be achieved by simple absolute fill per section or sticking to img tag */}
             <div className="absolute inset-0 z-0">
               <img 
                 src={place.img} 
@@ -160,7 +153,6 @@ export default function CollectionsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-slate-900/10"></div>
             </div>
 
-            {/* Content Card */}
             <div className="container mx-auto px-6 relative z-10 flex justify-center">
               <motion.div 
                 initial={{ opacity: 0, y: 50 }}
@@ -170,7 +162,6 @@ export default function CollectionsPage() {
                 className={`max-w-5xl w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-12 items-center ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
               >
                 
-                {/* Text Content */}
                 <div className="md:w-1/2 space-y-6">
                   <div className="flex items-center gap-2 text-yellow-400 font-bold uppercase tracking-widest text-xs">
                     <MapPin size={14} />
@@ -205,9 +196,7 @@ export default function CollectionsPage() {
                   </div>
                 </div>
 
-                {/* Decorative / Detail Image (Optional - or keep text only to let bg shine) */}
                 <div className="md:w-1/2 hidden md:block">
-                   {/* We keep this side transparent or add a smaller detail image to enhance the layout */}
                    <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-white/20 shadow-lg relative group">
                       <img src={place.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Detail view" />
                       <div className="absolute inset-0 bg-black/20"></div>
@@ -220,7 +209,24 @@ export default function CollectionsPage() {
         ))}
       </div>
 
-     
+      {/* --- FLOATING BOOK NOW BUTTON --- */}
+      <AnimatePresence>
+        {showButton && (
+          <motion.button
+            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.8 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => router.push('/tour-packages')}
+            className="fixed bottom-8 right-8 z-50 bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-bold py-4 px-8 rounded-full shadow-2xl flex items-center gap-2 transition-colors uppercase tracking-widest border-2 border-slate-900"
+          >
+            Book Now <ArrowRight size={20} />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+    
     </div>
   );
 }

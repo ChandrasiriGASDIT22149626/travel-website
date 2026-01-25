@@ -233,14 +233,66 @@ export default function Home() {
         <div className="relative z-20 container mx-auto px-6 h-full flex flex-col justify-center">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end h-full pb-24">
             <div className="lg:col-span-7 flex flex-col justify-center h-full pt-20">
-              <motion.div key={currentSlide.id + "-text"} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
-                <h3 className="text-yellow-400 font-bold tracking-[0.2em] uppercase mb-4 text-sm md:text-base">Bethel Ceylon Tours</h3>
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold text-white mb-6 leading-none tracking-tight drop-shadow-lg">{currentSlide.title}</h1>
-                <p className="text-lg md:text-xl text-gray-200 max-w-lg mb-8 font-light leading-relaxed drop-shadow-md">{currentSlide.desc}</p>
-                <button onClick={() => window.open(currentSlide.mapLink, '_blank')} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold transition-all flex items-center gap-3 w-fit group shadow-lg hover:shadow-blue-500/50">
-                  Explore {currentSlide.title} <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </button>
-              </motion.div>
+             <motion.div 
+  key={currentSlide.id + "-text"} 
+  initial={{ opacity: 0, y: 50 }} 
+  animate={{ opacity: 1, y: 0 }} 
+  transition={{ duration: 0.8, delay: 0.2 }}
+>
+  <h3 className="text-yellow-400 font-bold tracking-[0.2em] uppercase mb-4 text-sm md:text-base">
+    Bethel Ceylon Tours
+  </h3>
+  <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold text-white mb-6 leading-none tracking-tight drop-shadow-lg">
+    {currentSlide.title}
+  </h1>
+  <p className="text-lg md:text-xl text-gray-200 max-w-lg mb-8 font-light leading-relaxed drop-shadow-md">
+    {currentSlide.desc}
+  </p>
+  
+  <div className="flex flex-col items-start gap-6">
+    {/* 1. Existing Explore Button (Unchanged) */}
+    <button 
+      onClick={() => window.open(currentSlide.mapLink, '_blank')} 
+      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold transition-all flex items-center gap-3 w-fit group shadow-lg hover:shadow-blue-500/50"
+    >
+      Explore {currentSlide.title} 
+      <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+    </button>
+
+    {/* 2. NEW: Transparent Button with Typing Animation */}
+    <motion.button 
+      onClick={() => router.push('/tour-packages')}
+      className="px-8 py-4 rounded-full border-2 border-yellow-400 text-yellow-400 font-bold text-xl uppercase tracking-widest hover:bg-yellow-400/10 transition-colors"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 1 },
+        visible: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.1, // Speed of typing (0.1s per letter)
+            delayChildren: 0.5    // Wait 0.5s before starting
+          }
+        }
+      }}
+    >
+      {/* Typing Effect Logic */}
+      {"VIEW PACKAGES".split("").map((char, index) => (
+        <motion.span 
+          key={index} 
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 }
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </motion.button>
+</div>
+
+</motion.div>
+              
             </div>
             <div className="lg:col-span-5 hidden lg:flex flex-col gap-6 justify-end pb-8">
               <div className="flex gap-4 overflow-hidden">
@@ -279,7 +331,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-2">Browse our collection</h3>
               <p className="text-slate-200 mb-4 font-light text-sm">From mountain treks to coastal escapes.</p>
               <button className="flex items-center gap-2 font-semibold text-blue-400 hover:text-white transition group/btn">
-                Learn More <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                 Discover Escapes <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -293,7 +345,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-2">Flexible vehicle rentals</h3>
               <p className="text-slate-200 mb-4 font-light text-sm">Choose from sedans to SUVs.</p>
               <button className="flex items-center gap-2 font-semibold text-blue-400 hover:text-white transition group/btn">
-                Learn More <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                View options <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -307,7 +359,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-2">Reserve your tour</h3>
               <p className="text-slate-200 mb-4 font-light text-sm">Secure payment and instant confirmation.</p>
               <button className="flex items-center gap-2 font-semibold text-blue-400 hover:text-white transition group/btn">
-                Learn More <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                Check booking availability <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>

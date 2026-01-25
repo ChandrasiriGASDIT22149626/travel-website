@@ -625,6 +625,9 @@ export default function TourDetail() {
           </motion.div>
         )}
       </AnimatePresence>
+      
     </div>
+
+    
   );
 }

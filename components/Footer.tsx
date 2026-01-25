@@ -1,7 +1,8 @@
 'use client'; 
 import React from 'react';
 import { motion, Variants } from 'framer-motion'; 
-import { Send, Mail, Phone, Youtube, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Send, Mail, Phone, Youtube, Instagram, Facebook, Twitter, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 // Animation Variants
 const fadeInUp: Variants = {
@@ -30,20 +31,21 @@ const Footer = () => {
       
       {/* --- BACKGROUND IMAGE & OVERLAY --- */}
       <div className="absolute inset-0 z-0">
+        {/* Make sure this image exists in your public folder */}
         <img 
           src="/collections/seaa.jpg"
           alt="Footer Background" 
           className="w-full h-full object-cover"
         />
         {/* Dark Overlay for Readability */}
-        <div className="absolute inset-0 bg-black/70"></div> 
+        <div className="absolute inset-0 bg-black/80"></div> 
       </div>
 
       {/* --- FOOTER CONTENT --- */}
       <div className="relative z-10">
         
-        {/* Newsletter Section - Transparent background to show image */}
-        <div className="py-12 border-b border-white/10">
+        {/* --- CALL TO ACTION (PLAN YOUR ADVENTURE) --- */}
+        <div className="py-16 border-b border-white/10">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -51,7 +53,14 @@ const Footer = () => {
             variants={fadeInUp}
             className="container mx-auto px-6 text-center"
           >
-            {/* You can add newsletter content here if needed */}
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">Ready for an Unforgettable Journey?</h2>
+            
+            <Link href="/tour-packages" className="inline-block w-full md:w-auto">
+              <button className="bg-[#7FB03F] text-white px-12 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-lg hover:bg-[#6a9632] transition-all duration-300 shadow-[0_0_20px_rgba(127,176,63,0.4)] hover:shadow-[0_0_30px_rgba(127,176,63,0.6)] transform hover:-translate-y-1 flex items-center justify-center gap-3 w-full md:min-w-[400px]">
+                Plan Your Adventure <ArrowRight size={20} />
+              </button>
+            </Link>
+
           </motion.div>
         </div>
 
@@ -67,11 +76,11 @@ const Footer = () => {
           <motion.div variants={fadeInUp}>
             <h3 className="text-[#7FB03F] uppercase tracking-[0.2em] font-bold text-xs mb-6 pb-2 border-b border-white/10">Navigation</h3>
             <ul className="space-y-3 text-sm text-gray-400 font-light">
-              <li className="hover:text-white cursor-pointer transition-colors">About Us</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Destinations</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Experiences</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Tours</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Contact Us</li>
+              <li className="hover:text-white cursor-pointer transition-colors"><Link href="/about">About Us</Link></li>
+              <li className="hover:text-white cursor-pointer transition-colors"><Link href="/collections">Destinations</Link></li>
+              <li className="hover:text-white cursor-pointer transition-colors"><Link href="/tour-packages">Experiences</Link></li>
+              <li className="hover:text-white cursor-pointer transition-colors"><Link href="/tour-packages">Tours</Link></li>
+              <li className="hover:text-white cursor-pointer transition-colors"><Link href="/contact-us">Contact Us</Link></li>
             </ul>
           </motion.div>
 

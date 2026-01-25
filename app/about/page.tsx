@@ -1,13 +1,15 @@
 'use client'; 
 import React from 'react';
 import { motion, Variants } from 'framer-motion'; 
-import { ArrowRight } from 'lucide-react'; // Cleaned up unused imports
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link'; // Added Link import
 import Header from '@/components/Header';
+import Footer from '@/components/Footer'; // Ensure Footer is imported
 
 // --- ANIMATION VARIANTS ---
 
 const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0, 
@@ -40,11 +42,10 @@ export default function AboutPage() {
     <div className="relative min-h-screen font-sans text-slate-900 overflow-x-hidden">
       <Header />
 
-      {/* ================= BACKGROUND IMAGE (Updated to Local) ================= */}
+      {/* ================= BACKGROUND IMAGE ================= */}
       <div 
         className="fixed inset-0 z-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{ 
-          // Using the Cultural/Sigiriya image for the main background
           backgroundImage: `url('/tours/cultural-express.jpg')` 
         }}
       >
@@ -76,22 +77,19 @@ export default function AboutPage() {
                 </motion.p>
               </div>
 
-              {/* Asymmetric Image Grid (Updated to Local) */}
+              {/* Asymmetric Image Grid */}
               <div className="lg:w-1/2 grid grid-cols-2 gap-4">
                  <motion.div 
                    variants={scaleUp}
                    whileHover={{ scale: 1.02 }}
                    className="col-span-2 h-80 rounded-xl overflow-hidden shadow-2xl"
                  >
-                    {/* Using Hill Country / Tea Trails image */}
                     <img src="/about/country.webp" className="w-full h-full object-cover" alt="Sri Lanka Landscape" />
                  </motion.div>
                  <motion.div variants={scaleUp} whileHover={{ scale: 1.05 }} className="h-48 rounded-xl overflow-hidden shadow-lg">
-                    {/* Using Waves/Beach image */}
                     <img src="/about/waves.webp" className="w-full h-full object-cover" alt="Beach" />
                  </motion.div>
                  <motion.div variants={scaleUp} whileHover={{ scale: 1.05 }} className="h-48 rounded-xl overflow-hidden shadow-lg">
-                    {/* Using Adventure/Wildlife image */}
                     <img src="/about/adventuree.webp" className="w-full h-full object-cover" alt="Wildlife" />
                  </motion.div>
               </div>
@@ -131,14 +129,13 @@ export default function AboutPage() {
                 </div>
               </motion.div>
 
-              {/* Right Image (Updated to Local) */}
+              {/* Right Image */}
               <div className="relative h-[500px] w-full bg-gray-900 rounded-lg overflow-hidden">
                  <motion.img 
                   initial={{ scale: 1.1, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 0.8 }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
                   viewport={{ once: true }}
-                  // Using Ancient Wonders / Culture image
                   src="/about/vision.webp" 
                   alt="Visionary Travel" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
@@ -167,7 +164,7 @@ export default function AboutPage() {
               </h2>
             </motion.div>
 
-            {/* Service Item 1: Safe & Comfortable (Updated to Local) */}
+            {/* Service Item 1: Safe & Comfortable */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
@@ -181,15 +178,19 @@ export default function AboutPage() {
                   We focus on providing safe, comfortable, and affordable travel solutions with friendly customer service. 
                   Whether you are planning a relaxing beach holiday or an adventurous tour, we make your journey smooth.
                 </p>
-                <button className="flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300">
-                  Read More <ArrowRight size={18} />
-                </button>
+                
+                {/* --- NAVIGATION LINK ADDED HERE --- */}
+                <Link href="/tour-packages">
+                  <button className="flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300">
+                    Explore tours <ArrowRight size={18} />
+                  </button>
+                </Link>
+
               </div>
               <div className="order-1 md:order-2 h-[400px] bg-white/50 backdrop-blur rounded-xl overflow-hidden shadow-lg">
                 <motion.img 
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
-                  // Using Luxury Signature image
                   src="/about/safe.webp" 
                   className="w-full h-full object-cover" 
                   alt="Safe Travel" 
@@ -197,7 +198,7 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            {/* Service Item 2: Personalized Packages (LINK KEPT AS REQUESTED) */}
+            {/* Service Item 2: Personalized Packages */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
@@ -209,7 +210,6 @@ export default function AboutPage() {
                  <motion.img 
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
-                  // Using Luxury Signature image
                   src="/about/safee.webp" 
                   className="w-full h-full object-cover" 
                   alt="Safe Travel" 
@@ -221,9 +221,14 @@ export default function AboutPage() {
                   We offer personalized travel packages that meet individual needs and preferences. 
                   Your satisfaction and comfort are our top priorities, and we aim to build long-lasting relationships through trust.
                 </p>
-                <button className="flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300">
-                  Read More <ArrowRight size={18} />
-                </button>
+
+                {/* --- NAVIGATION LINK ADDED HERE --- */}
+                <Link href="/tour-packages">
+                  <button className="flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300">
+                    View our packages <ArrowRight size={18} />
+                  </button>
+                </Link>
+
               </div>
             </motion.div>
           </div>
@@ -264,6 +269,8 @@ export default function AboutPage() {
         </section>
 
       </div>
+      
+      
     </div>
   );
 }
