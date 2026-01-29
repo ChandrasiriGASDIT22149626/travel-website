@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion'; 
 import { Mail, Phone, MapPin, Send, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Footer from '@/components/Footer'; // Import Footer
 
 // --- FIXED ANIMATIONS ---
 const fadeInUp = {
@@ -163,7 +163,7 @@ export default function ContactUs() {
       {/* --- MAP SECTION --- */}
       <section className="h-[400px] w-full bg-slate-200 grayscale hover:grayscale-0 transition-all duration-700">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.2260776272534!2d79.8474123!3d6.9270786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2592182c3c99d%3A0xe5495e8f5b99e71b!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1705600000000!5m2!1sen!2sus" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.58585995963!2d79.8136893677561!3d6.921922572626079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo!5e0!3m2!1sen!2slk!4v1706173000000!5m2!1sen!2slk" 
           width="100%" 
           height="100%" 
           style={{ border: 0 }} 

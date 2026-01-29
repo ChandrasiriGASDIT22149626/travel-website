@@ -1,10 +1,10 @@
 'use client'; 
 import React from 'react';
 import { motion, Variants } from 'framer-motion'; 
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link'; // Added Link import
+import { ArrowRight } from 'lucide-react'; 
+import Link from 'next/link'; 
 import Header from '@/components/Header';
-import Footer from '@/components/Footer'; // Ensure Footer is imported
+import Footer from '@/components/Footer'; 
 
 // --- ANIMATION VARIANTS ---
 
@@ -179,11 +179,12 @@ export default function AboutPage() {
                   Whether you are planning a relaxing beach holiday or an adventurous tour, we make your journey smooth.
                 </p>
                 
-                {/* --- NAVIGATION LINK ADDED HERE --- */}
-                <Link href="/tour-packages">
-                  <button className="flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300">
-                    Explore tours <ArrowRight size={18} />
-                  </button>
+                {/* --- NAVIGATION LINK 1 --- */}
+                <Link 
+                  href="/tour-packages" 
+                  className="inline-flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  Explore tours <ArrowRight size={18} />
                 </Link>
 
               </div>
@@ -222,11 +223,12 @@ export default function AboutPage() {
                   Your satisfaction and comfort are our top priorities, and we aim to build long-lasting relationships through trust.
                 </p>
 
-                {/* --- NAVIGATION LINK ADDED HERE --- */}
-                <Link href="/tour-packages">
-                  <button className="flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300">
-                    View our packages <ArrowRight size={18} />
-                  </button>
+                {/* --- NAVIGATION LINK 2 --- */}
+                <Link 
+                  href="/tour-packages"
+                  className="inline-flex items-center gap-2 px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  View our packages <ArrowRight size={18} />
                 </Link>
 
               </div>
@@ -270,7 +272,7 @@ export default function AboutPage() {
 
       </div>
       
-      
+     
     </div>
   );
 }

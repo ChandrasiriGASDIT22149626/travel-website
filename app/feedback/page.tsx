@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// --- FIXED VARIANTS (Added 'as const' to fix build error) ---
+// --- FIXED VARIANTS ---
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.9, y: 20 },
   visible: { 
@@ -149,7 +149,7 @@ export default function Feedback() {
         </AnimatePresence>
       </main>
       
-      
+    
     </div>
   );
 }

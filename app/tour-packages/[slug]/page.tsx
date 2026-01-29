@@ -9,7 +9,7 @@ import { useParams } from 'next/navigation';
 // --- CONFIGURATION ---
 const WHATSAPP_NUMBER = "94764136737";
 
-// --- TOUR DATA ---
+// --- TOUR DATA (Kept same as provided) ---
 const tourData: Record<string, any> = {
   "cultural-express": {
     title: "Golden Triangle & Cultural Treasures",
@@ -380,9 +380,7 @@ const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
 
 export default function TourDetail() {
   const params = useParams();
-  // Ensure slug is a string (handle array case if necessary)
   const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
-  
   const tour = slug && tourData[slug] ? tourData[slug] : null;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -396,8 +394,8 @@ export default function TourDetail() {
 
   if (!tour) {
     return (
-      <div className="h-screen flex flex-col items-center justify-center bg-black text-white">
-        <h1 className="text-2xl font-bold">Tour Package Not Found</h1>
+      <div className="h-screen flex flex-col items-center justify-center bg-black text-white px-4 text-center">
+        <h1 className="text-xl md:text-2xl font-bold">Tour Package Not Found</h1>
         <a href="/tour-packages" className="mt-4 text-blue-400 underline">Return to Packages</a>
       </div>
     );
@@ -433,59 +431,66 @@ export default function TourDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-slate-900">
+    <div className="min-h-screen bg-gray-50 font-sans text-slate-900 overflow-x-hidden">
       <Header />
 
       {/* --- HERO SECTION --- */}
-      <div className="relative h-[60vh] w-full">
+      <div className="relative h-[50vh] md:h-[60vh] w-full">
         <img src={tour.image} alt={tour.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center p-4">
-          <motion.h1 initial="hidden" animate="visible" variants={fadeIn} className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">{tour.title}</motion.h1>
-          <motion.div initial="hidden" animate="visible" variants={fadeIn} className="flex gap-4 text-white/90 text-lg font-medium">
-            <span className="flex items-center gap-2"><Clock size={20} /> {tour.duration}</span>
-            <span className="flex items-center gap-2"><MapPin size={20} /> Sri Lanka</span>
+          <motion.h1 
+            initial="hidden" animate="visible" variants={fadeIn} 
+            className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 drop-shadow-lg"
+          >
+            {tour.title}
+          </motion.h1>
+          <motion.div initial="hidden" animate="visible" variants={fadeIn} className="flex flex-col md:flex-row gap-2 md:gap-4 text-white/90 text-base md:text-lg font-medium">
+            <span className="flex items-center justify-center gap-2"><Clock size={18} /> {tour.duration}</span>
+            <span className="hidden md:inline">|</span>
+            <span className="flex items-center justify-center gap-2"><MapPin size={18} /> Sri Lanka</span>
           </motion.div>
         </div>
       </div>
 
       {/* --- CONTENT --- */}
-      <div className="container mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      {/* Added pb-24 for mobile to account for sticky bottom button */}
+      <div className="container mx-auto px-6 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pb-24 md:pb-16">
         
         {/* Left: Highlights & Itinerary */}
         <div className="lg:col-span-2">
           
-          {/* NEW: Highlights Section */}
+          {/* Highlights Section */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
-            className="mb-12"
+            className="mb-10 md:mb-12"
           >
-            <h2 className="text-3xl font-bold mb-6 text-slate-800 border-b pb-4">Highlights</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-slate-800 border-b pb-3 md:pb-4">Highlights</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               {tour.highlights && tour.highlights.map((highlight: string, idx: number) => (
                 <div key={idx} className="flex items-start gap-3 p-3 bg-blue-50 rounded-xl">
-                  <Star size={20} className="text-yellow-500 fill-yellow-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-700 font-medium">{highlight}</span>
+                  <Star size={18} className="text-yellow-500 fill-yellow-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm md:text-base text-slate-700 font-medium">{highlight}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          <h2 className="text-3xl font-bold mb-6 text-slate-800 border-b pb-4">Detailed Itinerary</h2>
-          <div className="space-y-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-slate-800 border-b pb-3 md:pb-4">Detailed Itinerary</h2>
+          <div className="space-y-6 md:space-y-8">
             {tour.itinerary.map((item: any, i: number) => (
               <motion.div 
                 initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                key={i} className="flex gap-4"
+                key={i} className="flex gap-3 md:gap-4"
               >
                 <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shadow-lg">{i + 1}</div>
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm md:text-base font-bold shadow-lg flex-shrink-0">{i + 1}</div>
                   <div className="w-0.5 h-full bg-gray-200 mt-2"></div>
                 </div>
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex-grow hover:shadow-md transition-shadow">
-                  <h3 className="text-xl font-bold text-blue-900 mb-4">{item.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed text-justify">
+                <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex-grow hover:shadow-md transition-shadow">
+                  <h3 className="text-lg md:text-xl font-bold text-blue-900 mb-2 md:mb-4">{item.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed text-left">
                     {item.desc}
                   </p>
                 </div>
@@ -494,8 +499,8 @@ export default function TourDetail() {
           </div>
         </div>
 
-        {/* Right: Booking Card */}
-        <div className="lg:col-span-1">
+        {/* Right: Booking Card (Desktop Sticky) */}
+        <div className="hidden lg:block lg:col-span-1">
           <div className="sticky top-24 bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
             <h3 className="text-2xl font-bold mb-2">Book This Tour</h3>
             <p className="text-gray-500 text-sm mb-6">Customizable & Private</p>
@@ -514,25 +519,37 @@ export default function TourDetail() {
         </div>
       </div>
 
- 
+      {/* --- MOBILE STICKY BOOKING BAR --- */}
+      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between">
+        <div>
+            <p className="text-xs text-gray-500">Starting from</p>
+            <p className="font-bold text-blue-900">Custom Price</p>
+        </div>
+        <button 
+          onClick={() => setIsModalOpen(true)}
+          className="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg flex items-center gap-2"
+        >
+          Book Now <ArrowRight size={18} />
+        </button>
+      </div>
 
       {/* --- BOOKING MODAL --- */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/60 backdrop-blur-sm p-0 md:p-4 overflow-hidden"
           >
             <motion.div 
-              initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }}
-              className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto my-8"
+              initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }} transition={{ type: "spring", damping: 25, stiffness: 500 }}
+              className="bg-white rounded-t-3xl md:rounded-3xl shadow-2xl w-full md:max-w-2xl h-[90vh] md:h-auto md:max-h-[90vh] overflow-y-auto flex flex-col"
             >
-              <div className="p-6 border-b flex justify-between items-center sticky top-0 bg-white z-10">
-                <h3 className="text-2xl font-bold text-slate-800">Plan Your Trip</h3>
+              <div className="p-4 md:p-6 border-b flex justify-between items-center sticky top-0 bg-white z-10">
+                <h3 className="text-xl md:text-2xl font-bold text-slate-800">Plan Your Trip</h3>
                 <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-full"><X size={24} /></button>
               </div>
               
-              <form onSubmit={handleBookSubmit} className="p-6 md:p-8 space-y-6">
+              <form onSubmit={handleBookSubmit} className="p-4 md:p-8 space-y-4 md:space-y-6 flex-grow overflow-y-auto pb-20 md:pb-8">
                 
                 {/* Section 1: Personal Info */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -566,7 +583,7 @@ export default function TourDetail() {
                       <label className="text-xs text-gray-500">Children</label>
                       <input type="number" min="0" value={formData.children} className="w-full p-2 border rounded-lg" onChange={e => setFormData({...formData, children: e.target.value})} />
                     </div>
-                    <div className="md:col-span-2">
+                    <div className="col-span-2">
                       <label className="text-xs text-gray-500">Accommodation</label>
                       <select className="w-full p-2 border rounded-lg bg-white" onChange={e => setFormData({...formData, accommodation: e.target.value})}>
                         <option>3 Star Hotel</option>
@@ -626,8 +643,7 @@ export default function TourDetail() {
         )}
       </AnimatePresence>
       
+     
     </div>
-
-    
   );
 }
