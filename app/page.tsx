@@ -341,7 +341,7 @@ export default function Home() {
             onClick={() => router.push('/rent-vehicle')} 
             className="group relative overflow-hidden rounded-2xl h-96 cursor-pointer border border-slate-100 shadow-sm"
           >
-            <img src="/collections/reseve.webp" alt="Vehicle Rentals" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <img src="/collections/Reseve.webp" alt="Vehicle Rentals" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
               <h3 className="text-2xl font-bold mb-2">Flexible vehicle rentals</h3>
               <p className="text-slate-200 mb-4 font-light text-sm">Choose from sedans to SUVs.</p>
