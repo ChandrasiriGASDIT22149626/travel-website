@@ -17,45 +17,45 @@ const VEHICLES = {
   {
     name: "Wagon R",
     // Ensure 'wagon-r.jpg' exists in public/vehicles/cars/
-    image: "/vehicles/cars/wagon-r.jpg"
+    image: "/vehicles/cars/wagon-r.webp"
   },
   {
     name: "Fit Shuttle",
-    image: "/vehicles/cars/fit-shuttle.jpg"
+    image: "/vehicles/cars/fit-shuttle.webp"
   },
   {
     name: "Prado",
-    image: "/vehicles/cars/prado.jpg"
+    image: "/vehicles/cars/prado.webp"
   },
   {
     name: "Vitz",
-    image: "/vehicles/cars/vitz.jpg"
+    image: "/vehicles/cars/vitz.webp"
   },
   {
     name: "Vezel",
-    image: "/vehicles/cars/vezel.jpg"
+    image: "/vehicles/cars/vezel.webp"
   },
 ],
   Van: [
   { 
     name: "KDH", 
-    image: "/vehicles/vans/kdh.jpg" 
+    image: "/vehicles/vans/kdh.webp" 
   },
   { 
     name: "Caravan", 
-    image: "/vehicles/vans/caravan.jpg" 
+    image: "/vehicles/vans/caravan.webp" 
   },
   { 
     name: "Super GL", 
-    image: "/vehicles/vans/super-gl.jpg" 
+    image: "/vehicles/vans/super-gl.webp" 
   },
   { 
     name: "Spacia", 
-    image: "/vehicles/vans/spacia.jpg" 
+    image: "/vehicles/vans/spacia.webp" 
   },
   { 
     name: "Every Van", 
-    image: "/vehicles/vans/every-van.jpg" 
+    image: "/vehicles/vans/every-van.webp" 
   },
 ],
 };
@@ -124,11 +124,11 @@ Vehicle: ${selectedVehicle} (${vehicleType})
       {/* Background Image */}
       <div className="fixed inset-0 z-0 h-[60vh] bg-black">
          <img 
-            src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop" 
+            src="/vehicles/vans/rent.webp"  
             alt="Car Rental" 
             className="w-full h-full object-cover opacity-60"
          />
-         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
+        
       </div>
 
       <div className="relative z-10 pt-32 pb-24 px-6 container mx-auto max-w-5xl">

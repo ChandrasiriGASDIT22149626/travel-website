@@ -14,7 +14,7 @@ const packages = [
     destinations: "03 Destinations",
     desc: "Discover Sri Lanka’s rich cultural heritage with historic landmarks and traditions.",
     link: "/tour-packages/cultural-express",
-    image: "/tours/cultural-express.jpg",
+    image: "/tours/cultural-express.webp",
     tag: "Best Seller",
     color: "from-orange-400 to-red-500"
   },
@@ -25,7 +25,7 @@ const packages = [
     destinations: "07 Destinations",
     desc: "Perfect for thrill seekers—safaris, hikes, and nature expeditions await.",
     link: "/tour-packages/adventure-tours",
-    image: "/tours/hill-country.jpg",
+    image: "/tours/hill-country.webp",
     tag: "Adventure",
     color: "from-green-400 to-emerald-600"
   },
@@ -36,7 +36,7 @@ const packages = [
     destinations: "07 Destinations",
     desc: "A premium tour combining luxury with iconic sights and authentic experiences.",
     link: "/tour-packages/classic-deluxe",
-    image: "/tours/waves-wildlife.jpg",
+    image: "/tours/waves-wildlife.webp",
     tag: "Popular",
     color: "from-blue-400 to-cyan-500"
   },
@@ -47,7 +47,7 @@ const packages = [
     destinations: "08 Destinations",
     desc: "Relax on golden beaches and enjoy coastal adventures with stunning sunsets.",
     link: "/tour-packages/beach-splash",
-    image: "/tours/luxury-signature.jpg",
+    image: "/tours/luxury-signature.webp",
     color: "from-purple-400 to-pink-500"
   },
   {
@@ -57,7 +57,7 @@ const packages = [
     destinations: "04 Destinations",
     desc: "The ultimate Sri Lanka experience—covering all major cultural and natural wonders.",
     link: "/tour-packages/grand-classic",
-    image: "/tours/ancient-wonders.jpg",
+    image: "/tours/ancient-wonders.webp",
     color: "from-amber-400 to-orange-500"
   },
   {
@@ -67,7 +67,7 @@ const packages = [
     destinations: "05 Destinations",
     desc: "Explore national parks, wildlife safaris, and breathtaking natural landscapes.",
     link: "/tour-packages/wildlife-nature",
-    image: "/tours/adventure.jpg",
+    image: "/tours/adventure.webp",
     color: "from-lime-400 to-green-500"
   },
   {
@@ -77,7 +77,7 @@ const packages = [
     destinations: "05 Destinations",
     desc: "A dreamy getaway with romantic beaches, hills, and scenic escapes.",
     link: "/tour-packages/romantic-gateway",
-    image: "/tours/honeymoon.jpg",
+    image: "/tours/honeymoon.webp",
     color: "from-rose-400 to-pink-600"
   },
   {
@@ -92,12 +92,12 @@ const packages = [
   },
   {
     id: 9,
-    title: "RAMAYANA TOUR",
+    title: "RATHNAPURA TOUR",
     duration: "14 Nights",
     destinations: "08 Destinations",
-    desc: "Follow the Ramayana trail visiting sacred temples and legendary sites.",
-    link: "/tour-packages/ramayana-tour",
-    image: "/tours/ramayana.jpg",
+    desc: "Follow the Rathnapura trail visiting sacred temples and legendary sites.",
+    link:  "/tour-packages/gems-wellness",
+    image: "/tours/ramayana.webp",
     color: "from-indigo-400 to-violet-600"
   }
 ];

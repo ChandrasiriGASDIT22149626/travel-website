@@ -38,7 +38,7 @@ const destinations = [
     bestTime: "December - April",
     highlights: ["Lighthouse", "Cobblestone Streets", "Colonial Architecture"],
     desc: "A UNESCO World Heritage site, the Galle Fort is a trendy place to enjoy the architecture, history, shopping, and food. Walking through the streets of Galle Fort is like stepping back in time, with its Dutch-colonial buildings, ancient mosques, and grand churches.", 
-    img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=2639&auto=format&fit=crop" 
+    img: "/collections/galle.webp" 
   },
   { 
     title: "Yala National Park", 
@@ -62,7 +62,7 @@ const destinations = [
     bestTime: "May - September",
     highlights: ["Surfing", "Lagoon Safari", "Elephant Rock"],
     desc: "Arugam Bay is known as one of the best surf spots in the world. It is a moon-shaped curl of soft sand, home to a legendary point break that many regard as the best surf spot in the country. It's a tiny place, with a pop-up vibe and a very relaxed atmosphere.", 
-    img: "/tours/background.jpg"
+    img: "/collections/sea.jpg"
   },
   { 
     title: "Horton Plains", 
@@ -80,6 +80,15 @@ const destinations = [
     desc: "Trincomalee is a port city on the northeast coast of Sri Lanka. Set on a peninsula, Fort Frederick was built by the Portuguese in the 17th century. Within its grounds, the grand Koneswaram Temple stands on Swami Rock cliff, a popular vantage point for blue-whale watching.", 
     img: "/about/trinco.jpg"
   },
+  { 
+    title: "Colombo", 
+    region: "Western Province",
+    bestTime: "Year Round",
+    highlights: ["Lotus Tower", "Galle Face Green", "Gangaramaya Temple"],
+    desc: "Colombo is the vibrant commercial capital of Sri Lanka, offering a fascinating blend of colonial history and modern urban life. From the bustling streets of Pettah market to the sunset views at Galle Face Green and the iconic Lotus Tower, the city is a melting pot of cultures, flavors, and experiences.", 
+    // You can use a local image like "/about/colombo.jpg" or this Unsplash link
+    img: "/about/colombo.webp" 
+  }
 ];
 
 export default function CollectionsPage() {

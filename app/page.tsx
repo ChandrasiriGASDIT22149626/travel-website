@@ -15,7 +15,8 @@ const testimonials = [
     name: "Charlotte",
     country: "United Kingdom",
     text: "Had a magical trip to Sri Lanka with over 1,000 photos and a fantastic 20-minute film made by our son. Smooth, hassle-free holiday with a perfect guide. Highly recommended!",
-    img: "/feedback/background.jpg"
+    img: "/feedback/feeb.webp"
+    
   },
   {
     name: "James & Sarah",
@@ -27,7 +28,7 @@ const testimonials = [
     name: "Elena",
     country: "Germany",
     text: "We loved the cultural tour! Sigiriya was the highlight. The climb was tough but worth every step for that view. Thank you, Bethel Ceylon Tours, for organizing such a seamless experience.",
-    img: "https://images.unsplash.com/photo-1526772662000-3f88f107f5b8?auto=format&fit=crop&q=80&w=1000"
+    img: "/feedback/background.jpg"
   },
   {
     name: "Hiroshi",
@@ -168,7 +169,7 @@ export default function Home() {
   { 
     id: 5, 
     subtitle: "Endless blue horizons", 
-    title: "SEA", 
+    title: "ARUGAMBAY", 
     desc: "Relax by the crystal clear waters and pristine beaches of the island.", 
     img: "/collections/sea.jpg", 
     mapLink: "https://www.google.com/maps/search/?api=1&query=Negombo" 
@@ -326,7 +327,7 @@ export default function Home() {
             onClick={() => router.push('/collections')} 
             className="group relative overflow-hidden rounded-2xl h-96 cursor-pointer border border-slate-100 shadow-sm"
           >
-            <img src="https://images.unsplash.com/photo-1665849050332-8d5d7e59afb6?auto=format&fit=crop&q=80&w=600" alt="Browse Collection" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <img src="/collections/browse.webp" alt="Browse Collection" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
               <h3 className="text-2xl font-bold mb-2">Browse our collection</h3>
               <p className="text-slate-200 mb-4 font-light text-sm">From mountain treks to coastal escapes.</p>
@@ -340,7 +341,7 @@ export default function Home() {
             onClick={() => router.push('/rent-vehicle')} 
             className="group relative overflow-hidden rounded-2xl h-96 cursor-pointer border border-slate-100 shadow-sm"
           >
-            <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=600" alt="Vehicle Rentals" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <img src="/collections/reseve.webp" alt="Vehicle Rentals" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
               <h3 className="text-2xl font-bold mb-2">Flexible vehicle rentals</h3>
               <p className="text-slate-200 mb-4 font-light text-sm">Choose from sedans to SUVs.</p>
@@ -354,7 +355,7 @@ export default function Home() {
             onClick={() => router.push('/tour-packages')}
             className="group relative overflow-hidden rounded-2xl h-96 cursor-pointer border border-slate-100 shadow-sm"
           >
-            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=600" alt="Reserve Tour" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <img src="/collections/tour.webp" alt="Reserve Tour" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
               <h3 className="text-2xl font-bold mb-2">Reserve your tour</h3>
               <p className="text-slate-200 mb-4 font-light text-sm">Secure payment and instant confirmation.</p>
@@ -459,7 +460,7 @@ export default function Home() {
           </div>
           <div className="lg:w-1/2 relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
-            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" alt="Car Rental" className="relative rounded-2xl shadow-xl w-full transition duration-700" />
+            <img src= "/collections/drive.webp" alt="Car Rental" className="relative rounded-2xl shadow-xl w-full transition duration-700" />
           </div>
         </div>
       </section>

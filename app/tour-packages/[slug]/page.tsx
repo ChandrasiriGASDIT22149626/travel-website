@@ -13,7 +13,7 @@ const WHATSAPP_NUMBER = "94764136737";
 const tourData: Record<string, any> = {
   "cultural-express": {
     title: "Golden Triangle & Cultural Treasures",
-    image: "https://images.unsplash.com/photo-1588258524675-c632617da201?q=80&w=2574&auto=format&fit=crop",
+    image: "/tours/cultural-express.webp",
     duration: "05 Nights | 06 Days",
     description: "Immerse yourself in Sri Lanka's rich history, exploring ancient fortresses, temples, and wildlife.",
     highlights: [
@@ -59,7 +59,7 @@ const tourData: Record<string, any> = {
   },
   "adventure-tours": {
     title: "Tea Trails & Hill Country Escape",
-    image: "https://images.unsplash.com/photo-1546522307-e83c2763f910?q=80&w=2574&auto=format&fit=crop",
+    image: "/tours/hill-country.webp",
     duration: "06 Nights | 07 Days",
     description: "A journey through misty tea plantations, scenic train rides, and wildlife encounters.",
     highlights: [
@@ -110,7 +110,7 @@ const tourData: Record<string, any> = {
   },
   "classic-deluxe": {
     title: "Waves & Wildlife",
-    image: "https://images.unsplash.com/photo-1544979590-2c566860d845?q=80&w=2574&auto=format&fit=crop",
+    image: "/tours/eco.webp",
     duration: "07 Nights | 08 Days",
     description: "The perfect mix of beach relaxation, whales, and leopard safaris.",
     highlights: [
@@ -166,7 +166,7 @@ const tourData: Record<string, any> = {
   },
   "beach-splash": {
     title: "Luxury Sri Lanka Signature",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2574&auto=format&fit=crop",
+    image: "/tours/luxury-srilanka.jpg",
     duration: "09 Nights | 10 Days",
     description: "Experience the finest luxury resorts, private safaris, and exclusive train journeys.",
     highlights: [
@@ -232,7 +232,7 @@ const tourData: Record<string, any> = {
   },
   "grand-classic": {
     title: "Ancient Wonders & Wellness",
-    image: "https://images.unsplash.com/photo-1620619767323-b95a89183081?q=80&w=2574&auto=format&fit=crop",
+    image: "/tours/ancient-wonders.webp",
     duration: "06 Nights | 07 Days",
     description: "Rejuvenate your mind and body while exploring UNESCO World Heritage sites.",
     highlights: [
@@ -283,7 +283,7 @@ const tourData: Record<string, any> = {
   },
   "wildlife-nature": {
     title: "Adventure Sri Lanka",
-    image: "https://images.unsplash.com/photo-1590606907409-5435a26a5786?q=80&w=2574&auto=format&fit=crop",
+    image:  "/tours/adven.webp",
     duration: "08 Nights | 09 Days",
     description: "Thrilling rafting, mountain trekking, and wild safaris for the adventurous soul.",
     highlights: [
@@ -308,7 +308,7 @@ const tourData: Record<string, any> = {
   },
   "romantic-gateway": {
     title: "Honeymoon in Paradise",
-    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=2574&auto=format&fit=crop",
+    image:  "/tours/honeymoonn.webp",
     duration: "06 Nights | 07 Days",
     description: "A dreamy getaway with romantic beaches, candlelight dinners, and scenic escapes.",
     highlights: [
@@ -330,7 +330,7 @@ const tourData: Record<string, any> = {
   },
   "wellness-ayurvedic": {
     title: "Eco & Nature Trails",
-    image: "https://images.unsplash.com/photo-1504280509243-48b8b69fbbdd?q=80&w=2574&auto=format&fit=crop",
+    image: "/tours/ancient.webp",
     duration: "07 Nights | 08 Days",
     description: "Reconnect with nature in rainforests and eco-retreats.",
     highlights: [
@@ -353,7 +353,7 @@ const tourData: Record<string, any> = {
   },
   "gems-wellness": {
     title: "Gems, Nature & Ayurveda",
-    image: "https://images.unsplash.com/photo-1576487248805-cf45f6bcc67f?q=80&w=2574&auto=format&fit=crop",
+    image: "/tours/rathnapura.webp",
     duration: "05 Nights | 06 Days",
     description: "Discover the City of Gems, lush rainforests, and holistic Ayurveda wellness.",
     highlights: [
