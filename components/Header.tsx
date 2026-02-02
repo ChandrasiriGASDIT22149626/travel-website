@@ -53,7 +53,7 @@ const Header = () => {
                 src="/logo.png" 
                 alt="Logo" 
                 // UPDATED: Increased h- classes here
-                className={`w-auto object-contain cursor-pointer transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'h-14 md:h-18' : 'h-18 md:h-26'}`} 
+                className={`w-auto object-contain cursor-pointer transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'h-13 md:h-17' : 'h-16 md:h-24'}`} 
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   const nextSibling = e.currentTarget.nextElementSibling;
