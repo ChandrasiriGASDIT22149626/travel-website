@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Facebook, Linkedin, Instagram, Menu, X } from 'lucide-react'; // Added Menu and X
+import { Facebook, Linkedin, Instagram, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -49,16 +49,11 @@ const Header = () => {
           {/* LEFT: Logo */}
           <div className="flex-shrink-0 perspective-1000 z-50 relative"> 
             <Link href="/" onClick={handleLinkClick}>
-              <motion.img 
+              <img 
                 src="/logo.png" 
                 alt="Logo" 
-                className={`w-auto object-contain cursor-pointer transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'h-12 md:h-16' : 'h-14 md:h-20'}`} 
-                animate={{ rotateY: 360 }} 
-                transition={{ 
-                  duration: 5, 
-                  repeat: Infinity, 
-                  ease: "linear" 
-                }}
+                // UPDATED: Increased h- classes here
+                className={`w-auto object-contain cursor-pointer transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'h-14 md:h-18' : 'h-18 md:h-26'}`} 
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   const nextSibling = e.currentTarget.nextElementSibling;
