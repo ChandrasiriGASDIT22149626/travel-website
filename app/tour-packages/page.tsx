@@ -49,7 +49,7 @@ const packages = [
     title: "LUXURY SRI LANKA SIGNATURE",
     duration: "9 Nights",
     destinations: "08 Destinations",
-    price: "$1,062",
+    price: "FROM $1,062",
     desc: "Relax on golden beaches and enjoy coastal adventures with stunning sunsets.",
     link: "/tour-packages/beach-splash",
     image: "/tours/luxury-signature.webp",
@@ -60,7 +60,7 @@ const packages = [
     title: "ANCIENT WONDERS & WELLNESS",
     duration: "6 Nights",
     destinations: "04 Destinations",
-    price: "$697",
+    price: "FROM $697",
     desc: "The ultimate Sri Lanka experience—covering all major cultural and natural wonders.",
     link: "/tour-packages/grand-classic",
     image: "/tours/ancient-wonders.webp",
@@ -71,7 +71,7 @@ const packages = [
     title: "ADVENTURE SRI LANKA",
     duration: "8 Nights",
     destinations: "05 Destinations",
-    price: "$739",
+    price: "FROM $739",
     desc: "Explore national parks, wildlife safaris, and breathtaking natural landscapes.",
     link: "/tour-packages/wildlife-nature",
     image: "/tours/adventure.webp",
@@ -82,7 +82,7 @@ const packages = [
     title: "HONEYMOON IN PARADISE",
     duration: "6 Nights",
     destinations: "05 Destinations",
-    price: "$630",
+    price: "FROM $630",
     desc: "A dreamy getaway with romantic beaches, hills, and scenic escapes.",
     link: "/tour-packages/romantic-gateway",
     image: "/tours/honeymoon.webp",
@@ -93,7 +93,7 @@ const packages = [
     title: "ECO & NATURE TRAILS",
     duration: "07 Nights",
     destinations: "06 Destinations",
-    price: "$770",
+    price: "FROM $770",
     desc: "Rejuvenate with Ayurveda treatments and peaceful retreats across Sri Lanka.",
     link: "/tour-packages/wellness-ayurvedic",
     image: "https://images.unsplash.com/photo-1734279135113-8bd58bc02b69?q=80&w=800&auto=format&fit=crop",
@@ -104,7 +104,7 @@ const packages = [
     title: "RATHNAPURA TOUR",
     duration: "14 Nights",
     destinations: "08 Destinations",
-    price: "$605",
+    price: "FROM $605",
     desc: "Follow the Rathnapura trail visiting sacred temples and legendary sites.",
     link: "/tour-packages/gems-wellness",
     image: "/tours/ramayana.webp",
@@ -296,7 +296,7 @@ export default function TourPackages() {
 
       </div>
       
-      <Footer />
+    
     </div>
   );
 }
