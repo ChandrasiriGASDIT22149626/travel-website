@@ -1,376 +1,245 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, ArrowRight, X, User, Mail, Phone, Globe, Users, Activity, FileText, Send, CheckCircle, Star } from 'lucide-react';
+import { Calendar, MapPin, Clock, ArrowRight, X, User, Mail, Phone, Globe, Activity, FileText, Send,  Star } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useParams } from 'next/navigation';
+import { CheckCircle, Car, Users, Plane, Droplet, ShieldCheck, Languages, Headphones } from 'lucide-react';
 
 // --- CONFIGURATION ---
 const WHATSAPP_NUMBER = "94764136737";
 
-// --- TOUR DATA (Kept same as provided) ---
+// --- TOUR DATA (Keys match your existing links, Content from Word Doc) ---
 const tourData: Record<string, any> = {
-  "cultural-express": {
-    title: "Golden Triangle & Cultural Treasures",
-    image: "/tours/cultural-express.webp",
-    duration: "05 Nights | 06 Days",
-    description: "Immerse yourself in Sri Lanka's rich history, exploring ancient fortresses, temples, and wildlife.",
+  "wildlife-nature": {
+    title: "Adventure Sri Lanka",
+    image: "/tours/adven.webp",
+    duration: "08 Nights | 09 Days",
+    description: "From $739 per person (based on 12 pax). Thrilling rafting, mountain trekking, and wild safaris.",
     highlights: [
-      "Boat ride through Negombo Lagoon & mangroves",
-      "Climb the UNESCO World Heritage Sigiriya Rock Fortress",
-      "Jeep Safari at Minneriya National Park (Elephant Gathering)",
-      "Visit the sacred Temple of the Tooth Relic in Kandy",
-      "Cultural Dance Performance with traditional music",
-      "Stroll through the Royal Botanical Gardens in Peradeniya"
+      "Thrilling white-water rafting in Kitulgala rainforest",
+      "Mountain camping and trekking in Knuckles Range",
+      "Hike Ella Rock, explore Nine Arches Bridge, and Ravana Falls",
+      "Exciting Yala National Park safari to spot leopards, elephants, and exotic birds",
+      "Beach relaxation in Bentota with sunset photography",
+      "Extra free activities: river tubing, waterfall swimming, village cycling, forest canopy walks, paddy field and tea estate exploration, coastal walks, and photography opportunities",
+      "Farewell dinner on the last night to celebrate your adventure"
+
     ],
     itinerary: [
-      { 
-        day: "Day 1", 
-        title: "Arrival in Negombo", 
-        desc: "Arrive in Sri Lanka and receive a warm welcome at the international airport before transferring to your hotel in Negombo. After checking in, enjoy some time to relax after your journey. In the evening, take a peaceful lagoon boat ride through mangroves and traditional fishing villages, followed by a leisurely walk along Negombo Beach to admire a beautiful sunset over the Indian Ocean. Overnight stay in Negombo."
-      },
-      { 
-        day: "Day 2", 
-        title: "Negombo – Sigiriya (150 km / 3.5 hrs)", 
-        desc: "After breakfast, depart for Sigiriya, traveling through scenic countryside landscapes. Upon arrival, check in to your hotel and relax. In the afternoon, visit the iconic Sigiriya Rock Fortress, a UNESCO World Heritage Site dating back to the 5th century. Marvel at the ancient frescoes, mirror wall, lion terrace, and beautifully landscaped water gardens as you climb to the summit for breathtaking views. In the evening, enjoy a traditional village tour, experiencing rural Sri Lankan life, local cuisine, and culture. Overnight stay in Sigiriya."
-      },
-      { 
-        day: "Day 3", 
-        title: "Sigiriya – Minneriya Safari", 
-        desc: "Start the day with breakfast before heading to Minneriya National Park for an exciting jeep safari. The park is famous for its large herds of wild elephants, especially during the “Gathering,” as well as deer, birds, and other wildlife. Enjoy the natural beauty of the park’s grasslands and reservoir. After the safari, return to Sigiriya and spend the rest of the day at leisure, relaxing at your hotel or exploring the surroundings. Overnight stay in Sigiriya."
-      },
-      { 
-        day: "Day 4", 
-        title: "Sigiriya – Kandy (90 km / 2.5 hrs)", 
-        desc: "After breakfast, depart for Kandy, the cultural capital of Sri Lanka. En route, you may stop at local spice gardens to learn about Sri Lanka’s famous spices and herbs. Upon arrival in Kandy, visit the sacred Temple of the Tooth Relic, one of the most important Buddhist pilgrimage sites in the world. In the evening, enjoy a vibrant cultural dance performance showcasing traditional Kandyan music and dance. Overnight stay in Kandy."
-      },
-      { 
-        day: "Day 5", 
-        title: "Kandy – Negombo (110 km / 3 hrs)", 
-        desc: "After breakfast, visit the Royal Botanical Gardens in Peradeniya, renowned for its extensive collection of orchids, tropical plants, and towering palms. Later, begin your journey back to Negombo, enjoying scenic views along the way. Upon arrival, check in to your hotel and enjoy your final evening at leisure, perhaps exploring the beach or local markets. Overnight stay in Negombo."
-      },
-      { 
-        day: "Day 6", 
-        title: "Departure", 
-        desc: "After breakfast, check out from the hotel and transfer to the airport for your departure, carrying unforgettable memories of Sri Lanka’s ancient heritage, wildlife, and cultural treasures."
-      }
-    ]
-  },
-  "adventure-tours": {
-    title: "Tea Trails & Hill Country Escape",
-    image: "/tours/hill-country.webp",
-    duration: "06 Nights | 07 Days",
-    description: "A journey through misty tea plantations, scenic train rides, and wildlife encounters.",
-    highlights: [
-      "Visit Negombo Fish Market & Sunset Beach Walk",
-      "Kandy City Tour & Temple of the Tooth",
-      "Tea Factory Visit & Tea Tasting in Nuwara Eliya",
-      "Scenic Train Ride through the Hill Country",
-      "Visit Nine Arches Bridge & Hike Little Adam’s Peak",
-      "Udawalawe National Park Elephant Safari"
-    ],
-    itinerary: [
-      { 
-        day: "Day 1", 
-        title: "Arrival – Negombo", 
-        desc: "Arrive at Bandaranaike International Airport and meet your representative before transferring to your hotel in Negombo. After check-in, take some time to relax from your journey. Later, visit the lively local fish market to witness the day’s catch and experience local life. In the evening, enjoy a leisurely walk along Negombo Beach, watching the sunset over the Indian Ocean. Overnight stay in Negombo."
-      },
-      { 
-        day: "Day 2", 
-        title: "Negombo – Kandy (110 km / 3 hrs)", 
-        desc: "After breakfast, depart for Kandy, traveling through scenic countryside and hill landscapes. Upon arrival, enjoy a city tour of Kandy, including visits to local markets and viewpoints. Later, visit the sacred Temple of the Tooth Relic, one of the most important Buddhist pilgrimage sites in the world. In the evening, you may witness an evening pooja at the temple. Overnight stay in Kandy."
-      },
-      { 
-        day: "Day 3", 
-        title: "Kandy – Nuwara Eliya (80 km / 3 hrs)", 
-        desc: "After breakfast, proceed to Nuwara Eliya, known as “Little England,” passing lush tea plantations and misty hills. En route, visit a tea factory to learn about Sri Lanka’s world-famous Ceylon tea and enjoy a tea tasting session. Upon arrival in Nuwara Eliya, visit Gregory Lake and enjoy the cool climate and colonial charm of the town. Overnight stay in Nuwara Eliya."
-      },
-      { 
-        day: "Day 4", 
-        title: "Nuwara Eliya – Ella (by Train)", 
-        desc: "After breakfast, transfer to the railway station to board one of the world’s most scenic train journeys. Enjoy breathtaking views of rolling tea estates, waterfalls, valleys, and charming hill country villages during the train ride to Ella. Upon arrival, visit the iconic Nine Arches Bridge and, if time permits, enjoy a short hike to Little Adam’s Peak for panoramic views. Overnight stay in Ella."
-      },
-      { 
-        day: "Day 5", 
-        title: "Ella – Udawalawa (90 km / 2.5 hrs)", 
-        desc: "After breakfast, depart Ella for Udawalawa, descending from the hill country into Sri Lanka’s dry zone. Along the way, admire changing landscapes and rural villages. Upon arrival, enjoy an exciting jeep safari at Udawalawa National Park, famous for its large population of wild elephants as well as birds, deer, and other wildlife. Overnight stay near Udawalawa."
-      },
-      { 
-        day: "Day 6", 
-        title: "Udawalawa – Negombo (180 km / 4.5 hrs)", 
-        desc: "After breakfast, begin the journey back to Negombo. Enjoy scenic views of countryside, plantations, and local towns along the way. Upon arrival in Negombo, check in to your hotel and spend the rest of the day at leisure, relaxing by the beach or exploring nearby shops. Overnight stay in Negombo."
-      },
-      { 
-        day: "Day 7", 
-        title: "Departure", 
-        desc: "After breakfast, check out from the hotel and transfer to the airport for your departure, taking with you unforgettable memories of Sri Lanka’s hill country, tea trails, scenic train rides, and wildlife experiences."
-      }
-    ]
-  },
-  "classic-deluxe": {
-    title: "Waves & Wildlife",
-    image: "/tours/eco.webp",
-    duration: "07 Nights | 08 Days",
-    description: "The perfect mix of beach relaxation, whales, and leopard safaris.",
-    highlights: [
-      "Sunset viewing by the Indian Ocean in Negombo",
-      "Water sports activities in Bentota",
-      "Explore UNESCO Galle Dutch Fort",
-      "Whale watching tour in Mirissa",
-      "Leopard Safari at Yala National Park",
-      "Relax by Tissamaharama Lake"
-    ],
-    itinerary: [
-      { 
-        day: "Day 1", 
-        title: "Arrival in Negombo", 
-        desc: "Arrive at Bandaranaike International Airport and transfer to your hotel in Negombo. Spend the evening relaxing by the beach and enjoy a beautiful sunset by the Indian Ocean, easing into the tropical rhythm of Sri Lanka."
-      },
-      { 
-        day: "Day 2", 
-        title: "Negombo to Bentota", 
-        desc: "After breakfast, travel along the scenic coastal route to Bentota. Enjoy a water sports experience or simply relax by the beach, surrounded by palm trees and ocean breezes."
-      },
-      { 
-        day: "Day 3", 
-        title: "Bentota to Galle", 
-        desc: "Visit the historic coastal city of Galle. Explore the UNESCO-listed Galle Fort, colonial streets, and local markets, experiencing the blend of European architecture and Sri Lankan culture."
-      },
-      { 
-        day: "Day 4", 
-        title: "Galle to Mirissa", 
-        desc: "Proceed to Mirissa, a laid-back beach town famous for whale watching. Spend time relaxing on the beach and enjoying the peaceful coastal atmosphere."
-      },
-      { 
-        day: "Day 5", 
-        title: "Mirissa to Yala", 
-        desc: "Journey inland to Yala. In the afternoon, embark on an exciting safari at Yala National Park, renowned for its leopards, elephants, and diverse wildlife."
-      },
-      { 
-        day: "Day 6", 
-        title: "Yala to Tissamaharama", 
-        desc: "After breakfast, travel to Tissamaharama. Enjoy leisure time by the lake or relax at your hotel, surrounded by tranquil natural scenery."
-      },
-      { 
-        day: "Day 7", 
-        title: "Tissamaharama to Negombo", 
-        desc: "Travel back to Negombo through scenic countryside routes. Enjoy your final evening with beach leisure or a relaxed dinner."
-      },
-      { 
-        day: "Day 8", 
-        title: "Departure", 
-        desc: "Transfer to the airport for your onward journey, taking home unforgettable memories of Sri Lanka’s beaches and wildlife."
-      }
-    ]
-  },
-  "beach-splash": {
-    title: "Luxury Sri Lanka Signature",
-    image: "/tours/luxury-srilanka.jpg",
-    duration: "09 Nights | 10 Days",
-    description: "Experience the finest luxury resorts, private safaris, and exclusive train journeys.",
-    highlights: [
-      "Luxury Sunset Dinner in Negombo",
-      "Sigiriya Rock Fortress Climb",
-      "Private Minneriya Elephant Safari",
-      "Luxury Spa & Cultural Show in Kandy",
-      "Luxury Train Ride to Ella with Private Picnic",
-      "Yala National Park Safari"
-    ],
-    itinerary: [
-      { 
-        day: "Day 1", 
-        title: "Arrival in Negombo", 
-        desc: "Arrive in Sri Lanka and transfer to a luxury hotel in Negombo. Enjoy a sunset dinner by the beach and unwind after your journey."
-      },
-      { 
-        day: "Day 2", 
-        title: "Negombo to Sigiriya", 
-        desc: "Travel to Sigiriya, passing scenic countryside landscapes. Settle into your luxury resort and enjoy a relaxed evening."
-      },
-      { 
-        day: "Day 3", 
-        title: "Sigiriya & Minneriya Safari", 
-        desc: "Climb the iconic Sigiriya Rock Fortress in the morning. In the afternoon, experience a private safari at Minneriya National Park, famous for its elephant gatherings."
-      },
-      { 
-        day: "Day 4", 
-        title: "Sigiriya to Kandy", 
-        desc: "Journey to Kandy, visiting cultural sites en route. Enjoy a spa session and witness a vibrant evening cultural dance performance."
-      },
-      { 
-        day: "Day 5", 
-        title: "Kandy to Nuwara Eliya", 
-        desc: "Travel through lush tea plantations to Nuwara Eliya. Experience the charm of Sri Lanka’s hill country with cool weather and colonial-style surroundings."
-      },
-      { 
-        day: "Day 6", 
-        title: "Nuwara Eliya to Ella", 
-        desc: "Enjoy a luxury train ride through misty mountains and waterfalls. Arrive in Ella and relax with a private picnic amidst nature."
-      },
-      { 
-        day: "Day 7", 
-        title: "Ella to Yala", 
-        desc: "Depart for Yala and enjoy an afternoon safari at Yala National Park, spotting wildlife in its natural habitat."
-      },
-      { 
-        day: "Day 8", 
-        title: "Yala to Bentota", 
-        desc: "Travel to Bentota and unwind at a luxury beach resort, enjoying sun, sea, and serenity."
-      },
-      { 
-        day: "Day 9", 
-        title: "Bentota to Negombo", 
-        desc: "Enjoy beach leisure before returning to Negombo for your final overnight stay."
-      },
-      { 
-        day: "Day 10", 
-        title: "Departure", 
-        desc: "Transfer to the airport for departure, concluding your luxury Sri Lankan experience."
-      }
+      { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min from airport)", desc: "Arrive at Bandaranaike International Airport and transfer to your hotel in Negombo. Relax and recover from your journey. In the evening, enjoy a sunset walk along Negombo Beach, take a stroll around Negombo Lagoon, or explore the Dutch Fort ruins. - Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Kitulgala (90 km / 2.5 hrs)", desc: "Travel to Kitulgala, located amid lush rainforest. Experience thrilling white-water rafting on the Kelani River. Free activities include river tubing, exploring the rainforest trails, waterfall photography, and visiting local riverside villages. . End the day with sunset photography along the riverbank. - Overnight: Kitulgala " },
+      { day: "Day 3", title: "Kitulgala → Knuckles Range (150 km / 4–4.5 hrs)", desc: "Drive to the Knuckles Mountain Range, enjoying breathtaking views of the mountains, rivers, and tea plantations. Set up for mountain camping, with free activities such as scenic viewpoint photography, short walks through local villages and paddy fields, and sunset views from mountain ridges. - Overnight: Knuckles Mountain Range (Camping)" },
+      { day: "Day 4", title: "Knuckles Trekking", desc: "Spend the day trekking through the Knuckles region, encountering dense forests, waterfalls, and remote villages. Free activities include swimming in natural pools beneath waterfalls, canopy walks, birdwatching, and village cycling. Enjoy the sunset from a mountain viewpoint. - Spend the day trekking through the Knuckles region, encountering dense forests, waterfalls, and remote villages. Free activities include swimming in natural pools beneath waterfalls, canopy walks, birdwatching, and village cycling. Enjoy the sunset from a mountain viewpoint. - Overnight: Knuckles Mountain Range (Camping)" },
+      { day: "Day 5", title: "Knuckles → Ella (160 km / 4–5 hrs)", desc: "Travel to Ella, passing scenic countryside, tea estates, and hillside villages. Free activities include stops at mini waterfalls, short village walks, and sunset photography from local viewpoints. Evening free to relax in Ella town. - Overnight: Ella" },
+      { day: "Day 6", title: "Ella Sightseeing", desc: "Hike Ella Rock for panoramic views in the morning. Explore the Nine Arches Bridge and Ravana Falls, enjoying scenic hikes and photography opportunities. Free activities include walking through tea estates and paddy fields, visiting local markets, and strolling along village trails near Ravana Falls. - Overnight: Ella" },
+      { day: "Day 7", title: "Ella → Yala (150 km / 4 hrs)", desc: "Travel to Yala, descending into the dry zone. In the afternoon, enjoy a jeep safari at Yala National Park, spotting leopards, elephants, deer, and exotic birds. Free activities include forest trails outside the park, photography of paddy fields and rivers, and sunset viewpoints." },
+      { day: "Day 8", title: "Yala → Bentota (250 km / 5.5–6 hrs)", desc: "Drive to Bentota on the southwest coast. Relax at the beach and enjoy free activities such as coastal walks, exploration of fishing villages, coconut plantations, and sunset photography. In the evening, enjoy a farewell dinner celebrating your adventure across Sri Lanka." },
+      { day: "Day 9", title: "Bentota → Negombo → Departure (95 km / 2.5 hrs + 35 km / 45 min)", desc: "Return to Negombo and transfer to Bandaranaike International Airport for departure. If time allows, enjoy a final stroll along Negombo Lagoon, or visit local shops and markets for souvenirs, capturing one last sunset over the Indian Ocean before leaving." }
     ]
   },
   "grand-classic": {
     title: "Ancient Wonders & Wellness",
-    image: "/tours/ancient-wonders.webp",
+    image: "/collections/ancient-wonders.webp",
     duration: "06 Nights | 07 Days",
-    description: "Rejuvenate your mind and body while exploring UNESCO World Heritage sites.",
+    description: "From $697 per person (based on 12 pax). Rejuvenate with Ayurveda and explore UNESCO heritage sites.",
     highlights: [
-      "Ayurveda Wellness Treatments",
-      "Explore Anuradhapura Ancient City Ruins",
-      "Visit Mihintale (Birthplace of Buddhism)",
-      "Sigiriya Rock Fortress Climb",
-      "Minneriya National Park Safari",
-      "Temple of the Tooth Relic Visit"
+      "Explore Ancient Anuradhapura, a UNESCO World Heritage site",
+      "Visit Mihintale, the birthplace of Buddhism",
+      "Climb the Sigiriya Rock Fortress and admire frescoes and gardens , and panoramic views",
+      "Safari adventure at Minneriya National Park to spot elephants and wildlife",
+      "Visit the Temple of the Sacred Tooth Relic in Kandy",
+      "Free activities: village walks, paddy field trails, scenic viewpoints, and photography stops",
+      "Farewell dinner on the last night to celebrate your journey"
     ],
     itinerary: [
-      { 
-        day: "Day 1", 
-        title: "Arrival in Negombo", 
-        desc: "Arrive and transfer to your hotel in Negombo. Relax and recover from your journey. Transfer to an Ayurveda hotel in Negombo for relaxation & wellness treatments."
-      },
-      { 
-        day: "Day 2", 
-        title: "Negombo to Anuradhapura", 
-        desc: "Travel to the ancient city of Anuradhapura. Explore sacred stupas, ancient monasteries, and historical ruins (UNESCO World Heritage site)."
-      },
-      { 
-        day: "Day 3", 
-        title: "Anuradhapura – Mihintale – Sigiriya", 
-        desc: "Visit Mihintale, the birthplace of Buddhism in Sri Lanka, before continuing to Sigiriya for an overnight stay."
-      },
-      { 
-        day: "Day 4", 
-        title: "Sigiriya & Minneriya Safari", 
-        desc: "Climb the Sigiriya Rock Fortress in the morning. In the afternoon, enjoy a safari at Minneriya National Park."
-      },
-      { 
-        day: "Day 5", 
-        title: "Sigiriya to Kandy", 
-        desc: "Travel to Kandy and visit the Temple of the Sacred Tooth Relic, one of Buddhism’s most important shrines. Enjoy a relaxing spa session."
-      },
-      { 
-        day: "Day 6", 
-        title: "Kandy to Negombo", 
-        desc: "Return to Negombo, enjoying scenic views along the way. Relax during your final evening."
-      },
-      { 
-        day: "Day 7", 
-        title: "Departure", 
-        desc: "Transfer to the airport for departure."
-      }
-    ]
-  },
-  "wildlife-nature": {
-    title: "Adventure Sri Lanka",
-    image:  "/tours/adven.webp",
-    duration: "08 Nights | 09 Days",
-    description: "Thrilling rafting, mountain trekking, and wild safaris for the adventurous soul.",
-    highlights: [
-      "White Water Rafting in Kitulgala",
-      "Mountain Camping in Knuckles Range",
-      "Trekking through Waterfalls & Remote Villages",
-      "Hike Ella Rock & Visit Nine Arches Bridge",
-      "Yala National Park Wildlife Safari",
-      "Beach Relaxation in Bentota"
-    ],
-    itinerary: [
-      { day: "Day 1", title: "Arrival in Negombo", desc: "Arrive in Sri Lanka and transfer to your hotel. Rest and prepare for adventure." },
-      { day: "Day 2", title: "Negombo to Kitulgala", desc: "Travel to Kitulgala and experience thrilling white-water rafting amidst lush rainforest surroundings." },
-      { day: "Day 3", title: "Kitulgala to Knuckles", desc: "Proceed to the Knuckles Mountain Range, enjoying breathtaking views and mountain landscapes. Mountain camping experience." },
-      { day: "Day 4", title: "Knuckles Trekking", desc: "Spend the day trekking through the Knuckles region, encountering waterfalls, forests, and remote villages." },
-      { day: "Day 5", title: "Knuckles to Ella", desc: "Travel to Ella and relax after your mountain adventure." },
-      { day: "Day 6", title: "Ella Sightseeing", desc: "Visit Ella Rock, Nine Arches Bridge, and Ravana Falls, enjoying scenic hikes and photo opportunities." },
-      { day: "Day 7", title: "Ella to Yala", desc: "Travel to Yala and enjoy an exciting wildlife safari in the national park." },
-      { day: "Day 8", title: "Yala to Bentota", desc: "Head to Bentota for beach relaxation after days of adventure." },
-      { day: "Day 9", title: "Departure", desc: "Return to Negombo and transfer to the airport." }
-    ]
-  },
-  "romantic-gateway": {
-    title: "Honeymoon in Paradise",
-    image:  "/tours/honeymoonn.webp",
-    duration: "06 Nights | 07 Days",
-    description: "A dreamy getaway with romantic beaches, candlelight dinners, and scenic escapes.",
-    highlights: [
-      "Romantic Beach Villa Stay",
-      "Candlelight Dinner & Water Sports in Bentota",
-      "Explore Historic Galle Fort",
-      "Romantic Wildlife Safari in Udawalawe",
-      "Scenic Tea Plantations in Nuwara Eliya"
-    ],
-    itinerary: [
-      { day: "Day 1", title: "Arrival in Negombo", desc: "Arrive and transfer to a romantic beachside hotel. Enjoy private time together by the ocean." },
-      { day: "Day 2", title: "Negombo to Bentota", desc: "Travel to Bentota and enjoy water sports and a candlelight dinner by the beach." },
-      { day: "Day 3", title: "Bentota to Galle", desc: "Explore the charming streets of Galle Fort and enjoy a scenic coastal experience." },
-      { day: "Day 4", title: "Galle to Udawalawe", desc: "Travel to Udawalawe and enjoy a romantic wildlife safari in the national park." },
-      { day: "Day 5", title: "Udawalawe to Nuwara Eliya", desc: "Journey to the hill country, surrounded by tea plantations and cool climates." },
-      { day: "Day 6", title: "Nuwara Eliya to Negombo", desc: "Return to Negombo for your final overnight stay." },
-      { day: "Day 7", title: "Departure", desc: "Transfer to the airport, concluding your honeymoon journey." }
+      { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min from airport)", desc: "Arrive at Bandaranaike International Airport and transfer to your hotel. Relax after your journey and settle in. Check in to an Ayurveda hotel for wellness treatments such as massage, herbal therapies, or meditation. In the evening, enjoy a sunset walk along Negombo Beach or the lagoon for a peaceful start to your journey. - Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Anuradhapura (200 km / 4–4.5 hrs)", desc: "After breakfast, travel to Anuradhapura, one of Sri Lanka’s ancient capitals. Explore sacred stupas, monasteries, and historical ruins, including the Sri Maha Bodhi tree and Ruwanwelisaya. Take village walks or explore nearby paddy fields for free photography stops.-Overnight: Anuradhapura" },
+      { day: "Day 3", title: "Anuradhapura → Mihintale → Sigiriya (90 km / 2–2.5 hrs)", desc: "Visit Mihintale, the birthplace of Buddhism in Sri Lanka. Climb the ancient stairways and explore the monastic ruins with stunning views of the surrounding countryside. Continue to Sigiriya and settle into your hotel. Optional evening walk around Sigiriya villages for sunset views.-Overnight: Sigiriya" },
+      { day: "Day 4", title: "Sigiriya & Minneriya Safari(30 km round trip / 45 min) ", desc: "Climb the Sigiriya Rock Fortress in the morning, marveling at frescoes, Mirror Wall, Lion Terrace, and water gardens. In the afternoon, enjoy a jeep safari at Minneriya National Park to see wild elephants, deer, and birds. Optional free activities: photography at reservoirs, paddy fields, and sunset viewpoints.-Overnight: Sigiriya" },
+      { day: "Day 5", title: "Sigiriya → Kandy  (90 km / 2.5 hrs)", desc: "Travel to Kandy, stopping at spice gardens or countryside viewpoints along the way. In Kandy, visit the Temple of the Sacred Tooth Relic. Explore Kandy Lake, take in panoramic city views from Bahirawakanda Buddha statue, and browse the Central Market for handicrafts, souvenirs, and spices. Evening free for short walks and photography around the city.-Overnight: Kandy" },
+      { day: "Day 6", title: "Kandy → Negombo (110 km / 3 hrs)", desc: "After breakfast, return to Negombo, enjoying scenic countryside views and village stops along the way. In the evening, enjoy a farewell dinner at a local restaurant. After dinner, take a walk along the beach or Negombo Lagoon, capturing the last sunset. -Overnight: Negombo" },
+      { day: "Day 7", title: "Departure (35 km / 45 min to airport)", desc: "After breakfast, check out and transfer to Bandaranaike International Airport. If time permits, enjoy a final walk along Negombo Lagoon or do some last-minute souvenir shopping, leaving with memories of Sri Lanka’s ancient wonders, wildlife, and scenic landscapes."}
     ]
   },
   "wellness-ayurvedic": {
     title: "Eco & Nature Trails",
-    image: "/tours/ancient.webp",
+    image: "/tours/econature.webp",
     duration: "07 Nights | 08 Days",
-    description: "Reconnect with nature in rainforests and eco-retreats.",
+    description: "From $770 per person. Explore Sinharaja Rainforest, Udawalawe elephants, and Galle Fort.",
     highlights: [
-      "Sinharaja Rainforest (UNESCO) Visit",
-      "Morning Nature Walk",
-      "Udawalawe National Park Elephant Safari",
-      "Yala National Park Safari",
-      "Explore Historic Galle Fort"
+      "Explore the UNESCO-listed Sinharaja Rainforest",
+      "Guided morning nature walk with bird & butterfly spotting",
+      "Elephant safari at Udawalawe National Park",
+      "Wildlife safari at Yala National Park",
+      "Discover the historic Galle Dutch Fort",
+      "Free activities: village walks, waterfall viewpoints, lake sunsets, jungle trails & beach walks",
+      "Relax by scenic lakes, rivers, and coastal viewpoints",
+      "Farewell dinner on the last night in Negombo"
     ],
     itinerary: [
-      { day: "Day 1", title: "Arrival in Negombo", desc: "Arrive in Sri Lanka and transfer to your hotel. Relax and prepare for your nature adventure." },
-      { day: "Day 2", title: "Negombo to Sinharaja", desc: "Travel to the Sinharaja Rainforest, a UNESCO World Heritage Site rich in biodiversity." },
-      { day: "Day 3", title: "Sinharaja to Udawalawe", desc: "Enjoy a morning nature walk before proceeding to Udawalawe." },
-      { day: "Day 4", title: "Udawalawe Safari", desc: "Experience an exciting safari at Udawalawe National Park, famous for its elephants." },
-      { day: "Day 5", title: "Udawalawe to Yala", desc: "Travel to Yala and enjoy another wildlife safari in a different ecosystem." },
-      { day: "Day 6", title: "Yala to Galle", desc: "Proceed to Galle and explore its historic fort and coastal charm." },
-      { day: "Day 7", title: "Galle to Negombo", desc: "Return to Negombo, enjoying scenic coastal views." },
-      { day: "Day 8", title: "Departure", desc: "Transfer to the airport for your onward journey." }
+      { day: "Day 1", title: "Arrive at Bandaranaike International Airport and transfer to Negombo. Relax after your flight.Free activities: sunset beach walk, Negombo Lagoon view, village stroll, street photography.-Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Sinharaja (170 km | 4.5 hrs)", desc: "Travel inland to Sinharaja Rainforest. Evening free to enjoy jungle surroundings. Free activities: river bathing, bird spotting, forest-edge village walk.-Overnight: Sinharaja" },
+      { day: "Day 3", title: "Sinharaja → Udawalawe  (130 km | 3.5 hrs)", desc: "Enjoy a guided morning nature walk inside the rainforest. Continue to Udawalawe. Free activities: lake photography, sunset views, village walk.-Overnight: Udawalawe" },
+      { day: "Day 4", title: "Udawalawe Safari (Local travel)", desc: "Afternoon jeep safari in Udawalawe National Park, famous for wild elephants. Free activities: Udawalawe Reservoir walk, rural village stroll.n-Overnight: Udawalawe" },
+      { day: "Day 5", title: "Udawalawe → Yala (80 km | 2 hrs)", desc: "Travel to Yala through dry zone landscapes. Evening jeep safari at Yala National Park to spot leopards and bears. Free activities: nature walk near hotel, bird photography. - Overnight: Yala" },
+      { day: "Day 6", title: "Yala → Galle (190 km | 4.5 hrs)", desc: "Drive to the southern coast. Explore Galle Dutch Fort, colonial streets, and ramparts. Free activities: sunset walk on fort walls, beach photography,, café street stroll.-Overnight: Galle" },
+      { day: "Day 7", title: "Galle → Negombo (165 km | 3.5 hrs)", desc: "Return along the coastal highway. Relax at the beach. Farewell Dinner in the evening. Free activities: beach walk, lagoon sunset. -Overnight: Negombo" },
+      { day: "Day 8", title: "Departure (35 km | 45 min)", desc: "Transfer to the airport with unforgettable eco & wildlife memories." }
     ]
   },
   "gems-wellness": {
     title: "Gems, Nature & Ayurveda",
     image: "/tours/rathnapura.webp",
     duration: "05 Nights | 06 Days",
-    description: "Discover the City of Gems, lush rainforests, and holistic Ayurveda wellness.",
+    description: "From $605 per person. Discover the City of Gems, lush rainforests, and holistic Ayurveda wellness.",
     highlights: [
-      "Visit 'City of Gems' Ratnapura",
-      "Gem Mines & Museum Tour",
-      "Bopath Ella Waterfall Visit",
-      "Sinharaja Rainforest Trekking",
-      "Udawalawe National Park Safari",
-      "Ayurvedic Spa Treatment in Colombo"
+      "Discover Ratnapura – Sri Lanka’s City of Gems",
+      "Traditional gem mine & museum experience",
+      "Visit the beautiful Bopath Ella Waterfall",
+      "Sinharaja Rainforest trekking (UNESCO World Heritage Site)",
+      "Elephant safari at Udawalawe National Park",
+      "Relaxing Ayurvedic spa treatment in Colombo",
+      "Free experiences: village walks, river bathing, jungle viewpoints & sunset photography",
+      "•	Farewell dinner on the final night"
+
     ],
     itinerary: [
-      { day: "Day 1", title: "Negombo to Ratnapura", desc: "Travel inland to Ratnapura, the world-famous 'City of Gems'. Enjoy a scenic drive through lush landscapes and river valleys. Upon arrival, check in to your hotel and relax amid the tranquil surroundings of Sri Lanka’s gem country." },
-      { day: "Day 2", title: "Ratnapura City Tour & Gem Experience", desc: "Explore the cultural and natural highlights of Ratnapura. Visit the Gem Museum to learn about Sri Lanka’s precious stones, followed by an authentic visit to traditional gem mines. Later, enjoy a refreshing stop at the beautiful Bopath Ella Waterfall, surrounded by greenery and fresh mountain air." },
-      { day: "Day 3", title: "Ratnapura to Sinharaja Rainforest", desc: "Travel to the Sinharaja Rainforest, a UNESCO World Heritage Site and biodiversity hotspot. Enjoy guided trekking through dense rainforest trails, discovering rare flora, endemic birds, and unique wildlife in one of Sri Lanka’s last remaining primary rainforests." },
-      { day: "Day 4", title: "Sinharaja to Udawalawe", desc: "After breakfast, depart Sinharaja and journey to Udawalawe. In the evening, embark on an exciting safari at Udawalawe National Park, famous for large herds of elephants, water buffalo, and diverse birdlife." },
-      { day: "Day 5", title: "Udawalawe to Colombo – Ayurveda", desc: "Proceed to Colombo, Sri Lanka’s vibrant capital. In the evening, unwind with a rejuvenating Ayurvedic spa and wellness treatment designed to relax the body, calm the mind, and restore balance after your adventures." },
-      { day: "Day 6", title: "Departure", desc: "Travel to Negombo for your departure. Leave Sri Lanka with enriching memories of gemstones, rainforests, wildlife, and holistic wellness." }
+      { day: "Day 1", title: "Negombo → Ratnapura(170 km | 4.5 hrs)", desc: "Travel inland through coconut plantations, rubber estates, rivers, and tea-covered hills to Ratnapura, the world-famous City of Gems.Check in and relax in a peaceful nature setting.Free activities: evening village walk, riverbank stroll, sunset views. - Overnight: Ratnapura" },
+      { day: "Day 2", title: "Ratnapura Gem Experience (Local travel)", desc: "Visit the Ratnapura Gem Museum and a traditional gem mine, learning how Sri Lanka’s precious stones are discovered.Later, enjoy a refreshing stop at Bopath Ella Waterfall, one of the island’s most scenic cascades.Free activities: local market walk, temple visit, river bathing. - Overnight: Ratnapura" },
+      { day: "Day 3", title: "Ratnapura → Sinharaja (70 km | 2 hrs)", desc: "Travel to the Sinharaja Rainforest, a UNESCO biodiversity hotspot.Enjoy a guided rainforest trek through jungle trails, waterfalls, and bird habitats.Free activities: nature photography, forest-edge village walk, river stream bathing. - Overnight: Sinharaja" },
+      { day: "Day 4", title: "Sinharaja → Udawalawe (130 km | 3.5 hrs)", desc: "Drive through rainforest foothills and rural villages to Udawalawe.In the afternoon, enjoy a jeep safari at Udawalawe National Park, famous for elephants, deer, crocodiles, and birds.Free activities: lake sunset walk, bird watching, village stroll. - Overnight: Udawalawe" },
+      { day: "Day 5", title: "Udawalawe → Colombo (170 km | 4 hrs)", desc: "Travel to Colombo, Sri Lanka’s vibrant capital.In the evening, relax with a rejuvenating Ayurvedic spa & wellness treatment.Farewell Dinner in the evening.Free activities: Galle Face Green sunset walk, street food tasting, ocean promenade.-Overnight: Colombo" },
+      { day: "Day 6", title: "Negombo Airport (35 km | 45 min)", desc: "Transfer to the airport for departure, carrying unforgettable memories of gems, rainforests, wildlife, and wellness." }
+    ]
+  },
+  "cultural-express": {
+    title: "Golden Triangle & Cultural Treasures",
+    image: "/tours/golden.webp",
+    duration: "05 Nights | 06 Days",
+    description: "From $613 per person (based on 12 pax). The classic Sri Lankan loop featuring Sigiriya, Kandy, and Minneriya.",
+    highlights: [
+      "Visit the iconic Sigiriya Rock Fortress",
+      "Experience the Minneriya National Park Safari",
+      "Explore the Temple of the Tooth Relic in Kandy",
+      "Walk through traditional villages and paddy fields",
+      "Relax at Negombo Lagoon and watch a stunning sunset",
+      "Discover free photo-worthy stops: Dutch Fort ruins, local spice gardens, and lake viewpoints",
+      "Scenic drives through countryside, villages, and rural landscapes",
+      "Farewell dinner on the last night"
+    ],
+    itinerary: [
+      { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min from airport)", desc: "Arrive at Bandaranaike International Airport and transfer to your hotel in Negombo. After check-in, take time to relax. In the evening, enjoy a peaceful boat ride through Negombo Lagoon, exploring mangroves and traditional fishing villages, followed by a leisurely walk along Negombo Beach to admire the sunset. You can also visit the Negombo Fish Market, Dutch Fort ruins, and St. Mary’s Church for a glimpse of local life.- Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Sigiriya (150 km / 3.5 hrs)", desc: "After breakfast, depart for Sigiriya, traveling through scenic countryside. On arrival, visit the Sigiriya Rock Fortress, marveling at frescoes, the Mirror Wall, Lion Terrace, and landscaped gardens. In the afternoon, take a walk through nearby villages, reservoirs, and lakes, experiencing rural life and photography opportunities. In the evening, immerse yourself in local village culture. - Overnight: Sigiriya" },
+      { day: "Day 3", title: "Minneriya Safari & Sigiriya Surroundings (30 km round trip / 45 min)", desc: "After breakfast, head to Minneriya National Park for a jeep safari to spot wild elephants, deer, and birds. Return to Sigiriya and spend the afternoon at leisure. Explore village trails, paddy fields, and reservoirs, or enjoy photography at sunset viewpoints -Overnight: Sigiriya" },
+      { day: "Day 4", title: "Sigiriya → Kandy (90 km / 2.5 hrs)", desc: "Travel to Kandy, with optional stops at roadside spice gardens and countryside villages for photos and cultural experiences. In Kandy, visit the Temple of the Tooth Relic, walk around Kandy Lake, enjoy panoramic viewpoints, and explore the Central Market for spices and handicrafts. Evening includes an optional cultural dance performance. - Overnight: Kandy" },
+      { day: "Day 5", title: "Kandy → Negombo (110 km / 3 hrs)", desc: "After breakfast, visit the Royal Botanical Gardens in Peradeniya to see orchids, tropical plants, and towering palms. On the drive back to Negombo, stop at scenic viewpoints and explore village roads and paddy fields. In the evening, enjoy a farewell dinner at a local restaurant, celebrating your journey through Sri Lanka. After dinner, take a beach walk or visit the Negombo Lagoon for a final scenic experience. - Overnight: Negombo" },
+      { day: "Day 6", title: "Departure (35 km / 45 min to airport)", desc: "After breakfast, check out from your hotel and transfer to the airport. If time allows, take a last walk along Negombo Lagoon or do some final souvenir shopping, leaving with memories of Sri Lanka’s ancient heritage, wildlife, and picturesque landscapes." }
+    ]
+  },
+  "romantic-gateway": {
+    title: "Honeymoon in Paradise",
+    image: "/tours/honeymoonn.webp",
+    duration: "06 Nights | 07 Days",
+    description: "From $630 per person. A dreamy getaway with romantic beaches, candlelight dinners, and scenic escapes.",
+    highlights: [
+      "Stay in a romantic beach villa with private time by the ocean",
+      "Enjoy candlelight dinners and water sports in Bentota",
+      "Explore historic Galle Fort and scenic coastal streets",
+      "Embark on a romantic wildlife safari in Udawalawe National Park",
+      "Discover tea plantations and scenic landscapes in Nuwara Eliya",
+      "Enjoy a romantic boat ride at Gregory Lake",
+      "Free activities: sunset walks, paddy field trails, village strolls, photography spots, and scenic viewpoints",
+      "Farewell dinner on the last night"
+    ],
+    itinerary: [
+      { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min from airport)", desc: "Arrive at Bandaranaike International Airport and transfer to a romantic beachside hotel. Relax and enjoy private time by the ocean. Free activities include a sunset walk along Negombo Beach, strolls along Negombo Lagoon, or exploring local streets and markets together.-Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Bentota (95 km / 2.5 hrs)", desc: "Travel along the scenic coastal route to Bentota. Spend the day enjoying water sports such as snorkeling, kayaking, or paddleboarding. In the evening, delight in a romantic candlelight dinner by the beach. Free activities include sunset walks along the shore, exploring local fishing villages, or photography of coastal scenery.-Overnight: Bentota" },
+      { day: "Day 3", title: "Bentota → Galle (95 km / 2.5 hrs)", desc: "Travel to the historic city of Galle. Explore the UNESCO-listed Galle Fort, stroll along its charming streets, colonial architecture, and coastal ramparts. Free activities include exploring local cafes, boutique shops, and photo stops along the fort walls. Evening: enjoy a sunset walk along Galle Lighthouse and promenade. -Overnight: Galle" },
+      { day: "Day 4", title: "Galle → Udawalawe (180 km / 4.5 hrs)", desc: "Drive inland to Udawalawe, passing paddy fields, rivers, and villages. Enjoy an exciting wildlife safari at Udawalawe National Park, spotting elephants, birds, and deer. Free activities: photography at scenic reservoirs, exploring village roads nearby, or sunset photography at park viewpoints.- Overnight: Udawalawe" },
+      { day: "Day 5", title: "Udawalawe → Nuwara Eliya (180 km / 5 hrs)", desc: "Journey to Nuwara Eliya, entering Sri Lanka’s hill country. Explore scenic tea plantations, waterfalls, and misty valleys along the way. In the evening, enjoy a romantic boat ride at Gregory Lake, soaking in the serene surroundings. Free activities include strolling through tea estates, visiting paddy fields, or photography at scenic viewpoints. - Overnight: Nuwara Eliya" },
+      { day: "Day 6", title: "Nuwara Eliya → Negombo (180 km / 4.5 hrs)", desc: "Return to Negombo along scenic countryside roads. Free activities include stopping at small villages, paddy fields, or viewpoints for photography. In the evening, enjoy a farewell dinner celebrating your honeymoon memories. Optional evening stroll along Negombo Beach or Lagoon. - Overnight: Negombo" },
+      { day: "Day 7", title: "Departure (35 km / 45 min to airport)", desc: "After breakfast, check out and transfer to Bandaranaike International Airport. Optional final stroll along the beach or lagoon, leaving with unforgettable memories of your romantic Sri Lanka journey." }
+    ]
+  },
+  "beach-splash": {
+    title: "Luxury Sri Lanka Signature",
+    image: "/tours/luxury-srilanka.jpg",
+    duration: "09 Nights | 10 Days",
+    description: "From $1,062 per person (based on 12 pax). The ultimate luxury experience with high-end resorts and private safaris.",
+    highlights: [
+      "Relax at luxurious beachfront resorts and hill country retreats",
+      "Explore Sigiriya Rock Fortress and Temple of the Tooth",
+      "Experience hill country tea plantations and Little Adam’s Peak",
+      "Enjoy wildlife safaris at Udawalawe or Yala National Parks",
+      "Discover UNESCO World Heritage sites and colonial architecture",
+      "Free activities: lagoon walks, paddy field trails, village exploration, and scenic viewpoints",
+      "Farewell dinner on the last night"
+    ],
+    itinerary: [
+      { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min)", desc: "Arrive at Bandaranaike International Airport and transfer to your hotel. Relax after your flight, take a sunset walk along Negombo Beach, or stroll the lagoon and Dutch Fort ruins. - Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Sigiriya (150 km / 3.5 hrs)", desc: "Travel inland to Sigiriya. Visit the Sigiriya Rock Fortress and surrounding gardens, frescoes, and mirror wall. Explore nearby villages, reservoirs, and paddy fields for photography and short walks.- Overnight: Sigiriya" },
+      { day: "Day 3", title: "Minneriya Safari & Village Exploration (30 km / 45 min round trip)", desc: "Enjoy a jeep safari at Minneriya National Park to see elephants, deer, and birds. Afternoon free to explore village trails, paddy fields, and natural reservoirs, or photograph sunset views over the countryside. - Overnight: Sigiriya" },
+      { day: "Day 4", title: "Sigiriya → Kandy (90 km / 2.5 hrs)", desc: "Drive to Kandy, stopping at roadside spice gardens and countryside villages. Visit the Temple of the Tooth Relic, explore Kandy Lake and viewpoints, and browse the Central Market. Evening includes a cultural dance performance." },
+      { day: "Day 5", title: "Kandy → Nuwara Eliya (80 km / 3 hrs)", desc: "Travel to Nuwara Eliya via tea plantations and misty hills. Visit a tea factory for a tasting session, stroll around Gregory Lake, and explore Victoria Park or nearby viewpoints. - Overnight: Nuwara Eliya" },
+      { day: "Day 6", title: "Nuwara Eliya → Ella (Train Ride)", desc: "Board one of the world’s most scenic trains to Ella. Visit Nine Arches Bridge, hike Little Adam’s Peak, and enjoy photography at tea estates and waterfalls. Evening free to explore Ella town. - Overnight: Ella" },
+      { day: "Day 7", title: "Ella → Udawalawe (90 km / 2.5 hrs)", desc: "Travel to Udawalawe, passing villages, rivers, and paddy fields. Enjoy a jeep safari at Udawalawe National Park to spot elephants, deer, and birds. Optional nature walks near the buffer zones for free exploration. - Overnight: Udawalawe" },
+      { day: "Day 8", title: "Udawalawe → Bentota (200 km / 5 hrs)", desc: "Drive to Bentota on the coast. Enjoy beach relaxation or optional water sports. Take a coastal walk or explore local villages for free. Overnight: Bentota" },
+      { day: "Day 9", title: "Bentota → Negombo (95 km / 2.5 hrs)", desc: "Return to Negombo. In the evening, enjoy a farewell dinner at a local restaurant, celebrating your luxurious journey through Sri Lanka. Optional beach or lagoon walks after dinner. - Overnight: Negombo" },
+      { day: "Day 10", title: "Departure (35 km / 45 min) ", desc: "After breakfast, check out and transfer to the airport. Optional final stroll along Negombo Lagoon or last-minute shopping before departure." }
+    ]
+  },
+  "adventure-tours": {
+    title: "Tea Trails & Hill Country Escape",
+    image: "/tours/teatrails.webp",
+    duration: "06 Nights | 07 Days",
+    description: "From $589 per person (based on 12 pax). A scenic journey through misty tea estates and waterfalls.",
+    highlights: [
+      "Explore the Negombo Fish Market and enjoy a sunset beach walk",
+      "Experience Kandy city tour and Temple of the Tooth Relic",
+      "Visit a tea factory in Nuwara Eliya and enjoy a Ceylon tea tasting",
+      "Take one of the world’s most scenic train rides to Ella",
+      "Visit the iconic Nine Arches Bridge and hike Little Adam’s Peak",
+      "Enjoy a jeep safari at Udawalawe National Park",
+      "Walk through villages, paddy fields, and scenic viewpoints along the route",
+      "Farewell dinner on the last night"
+    ],
+    itinerary: [
+      { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min from airport)", desc: "Arrive at Bandaranaike International Airport and transfer to your hotel in Negombo. After check-in, relax and refresh after your journey. In the evening, visit the Negombo Fish Market to witness the day’s catch and local life. Take a leisurely walk along Negombo Beach to admire the sunset over the Indian Ocean or explore Dutch Fort ruins and St. Mary’s Church nearby. For photography enthusiasts, the lagoon and beach provide scenic opportunities.- Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Kandy (110 km / 3 hrs)", desc: "After breakfast, depart for Kandy, traveling through picturesque countryside and rolling hills. On arrival, enjoy a city tour of Kandy, visiting local markets, viewpoints, and Kandy Lake. Explore the sacred Temple of the Tooth Relic, one of the most important Buddhist pilgrimage sites. Witness the evening pooja at the temple and take a stroll along hilltop viewpoints or local village roads nearby for free photo stops. - Overnight: Kandy" },
+      { day: "Day 3", title: "Kandy → Nuwara Eliya (80 km / 3 hrs)", desc: "After breakfast, proceed to Nuwara Eliya, also known as “Little England,” passing lush tea plantations and misty hills. En route, stop at a tea factory to learn about Ceylon tea and enjoy a tasting session. Upon arrival, visit Gregory Lake and explore the town’s colonial charm. Take a walk in Victoria Park or enjoy scenic viewpoints over tea plantations for photography. -Overnight: Nuwara Eliya" },
+      { day: "Day 4", title: "Nuwara Eliya → Ella (Train Ride)", desc: "After breakfast, transfer to the railway station for one of the world’s most scenic train journeys. Travel through rolling tea estates, waterfalls, valleys, and hill country villages to Ella. Upon arrival, visit the Nine Arches Bridge, a stunning architectural landmark, and enjoy a short hike to Little Adam’s Peak for panoramic views. Evening free to explore Ella town or relax at a café. - Overnight: Ella" },
+      { day: "Day 5", title: "Ella → Udawalawe (90 km / 2.5 hrs)", desc: "After breakfast, depart Ella for Udawalawe, descending into the dry zone. Admire changing landscapes, rural villages, and rivers along the way. Upon arrival, embark on a thrilling jeep safari at Udawalawe National Park, famous for elephants, birds, and deer. In the evening, take a short village walk nearby or enjoy sunset photography over rural landscapes. - Overnight: Udawalawe" },
+      { day: "Day 6", title: "Udawalawe → Negombo (180 km / 4.5 hrs)", desc: "After breakfast, begin your journey back to Negombo, passing countryside, plantations, and small towns. On arrival, check in to your hotel. In the evening, celebrate your journey with a farewell dinner at a local restaurant. After dinner, enjoy a beach walk or a scenic stroll along the Negombo Lagoon, capturing final sunset views.- Overnight: Negombo" },
+      { day: "Day 7", title: "Departure (35 km / 45 min to airport)", desc: "After breakfast, check out from your hotel and transfer to Bandaranaike International Airport. If time allows, enjoy a final walk along Negombo Lagoon or do some last-minute souvenir shopping, leaving with memories of Sri Lanka’s tea trails, hill country scenery, wildlife, and cultural experiences." }
+    ]
+  },
+  "classic-deluxe": {
+    title: "Waves & Wildlife",
+    image: "/tours/waves-and-wildlife.webp",
+    duration: "07 Nights | 08 Days",
+    description: "From $702 per person (based on 12 pax). The perfect mix of ocean waves, whales, and wild leopard safaris.",
+    highlights: [
+      "Relax and enjoy sunset by the Indian Ocean in Negombo",
+      "Thrill in water sports at Bentota or take scenic beach walks",
+      "Explore the UNESCO-listed Galle Fort and colonial streets",
+      "Visit Coconut Hills and Parrot Rock in Mirissa",
+      "Witness majestic whales in Mirissa (optional)",
+      "Leisure and photography by Tissamaharama Lake and surrounding countryside",
+      "Safari adventure at Yala National Park",
+      "Walk through coastal villages, paddy fields, and scenic viewpoints",
+      "Farewell dinner on the last night"
+    ],
+    itinerary: [
+      { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min from airport)", desc: "Arrive at Bandaranaike International Airport and transfer to your hotel in Negombo. Spend the evening relaxing on the beach and admire the sunset over the Indian Ocean. Optional strolls include Negombo Lagoon, Dutch Fort ruins, or visiting the local fish market. - Overnight: Negombo" },
+      { day: "Day 2", title: "Negombo → Bentota (95 km / 2.5 hrs)", desc: "After breakfast, drive along the scenic coastal route to Bentota. Enjoy water sports like jet-skiing, banana boat rides, or snorkeling (optional). For free alternatives, take beach walks, explore palm-lined village roads, or relax by the ocean - Overnight: Bentota" },
+      { day: "Day 3", title: "Bentota → Galle (80 km / 2 hrs)", desc: "Travel south to Galle. Explore the UNESCO-listed Galle Fort, wandering colonial streets, ramparts, and local markets. Free activities include walking along the ramparts, exploring hidden alleys, and taking photos of colonial architecture. - Overnight: Galle" },
+      { day: "Day 4", title: "Galle → Mirissa (35 km / 1 hr)", desc: "Proceed to Mirissa, a serene beach town. Visit Coconut Hills and Parrot Rock, two scenic viewpoints offering panoramic views of the coastline and Indian Ocean—perfect for photography and a short walk. Spend the rest of the day relaxing on Mirissa Beach, exploring the fishing village, or enjoying a sunset along the coast. - Overnight: Mirissa" },
+      { day: "Day 5", title: "Mirissa → Yala (150 km / 4 hrs)", desc: "Travel inland to Yala, passing paddy fields, small villages, and scenic countryside. In the afternoon, enjoy a jeep safari at Yala National Park, spotting leopards, elephants, deer, and exotic birds. Free activities include short nature walks near Yala buffer zones or photography stops along the way. - Overnight: Yala" },
+      { day: "Day 6", title: "Yala → Tissamaharama (20 km / 30 min)", desc: "After breakfast, travel to Tissamaharama. Spend leisure time by Tissamaharama Lake, explore village roads and paddy fields, or enjoy sunset photography along the lake. - Overnight: Tissamaharama" },
+      { day: "Day 7", title: "Tissamaharama → Negombo (240 km / 5–5.5 hrs)", desc: "Begin the journey back to Negombo through scenic countryside and villages. Upon arrival, check in to your hotel and enjoy a farewell dinner at a local restaurant. After dinner, take a beach walk or stroll along Negombo Lagoon, capturing the last sunset over the Indian Ocean. - Overnight: Negombo" },
+      { day: "Day 8", title: "Departure - (35 km / 45 min to airport)", desc: "After breakfast, check out and transfer to Bandaranaike International Airport. If time allows, enjoy a final walk along Negombo Lagoon or do some last-minute souvenir shopping, leaving with unforgettable memories of Sri Lanka’s beaches, wildlife, and coastal charm." }
     ]
   }
 };
@@ -396,6 +265,7 @@ export default function TourDetail() {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-black text-white px-4 text-center">
         <h1 className="text-xl md:text-2xl font-bold">Tour Package Not Found</h1>
+        <p className="mt-2 text-gray-400">The package "{slug}" does not exist.</p>
         <a href="/tour-packages" className="mt-4 text-blue-400 underline">Return to Packages</a>
       </div>
     );
@@ -453,12 +323,16 @@ export default function TourDetail() {
       </div>
 
       {/* --- CONTENT --- */}
-      {/* Added pb-24 for mobile to account for sticky bottom button */}
       <div className="container mx-auto px-6 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pb-24 md:pb-16">
         
         {/* Left: Highlights & Itinerary */}
         <div className="lg:col-span-2">
           
+          {/* Description */}
+          <div className="mb-8 text-gray-700 leading-relaxed">
+            <p className="text-lg font-medium text-blue-900">{tour.description}</p>
+          </div>
+
           {/* Highlights Section */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
@@ -502,22 +376,72 @@ export default function TourDetail() {
         {/* Right: Booking Card (Desktop Sticky) */}
         <div className="hidden lg:block lg:col-span-1">
           <div className="sticky top-24 bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
-            <h3 className="text-2xl font-bold mb-2">Book This Tour</h3>
+            <h3 className="text-2xl font-bold mb-2 text-slate-900">Book This Tour</h3>
             <p className="text-gray-500 text-sm mb-6">Customizable & Private</p>
+            
             <div className="space-y-4 mb-8">
-              <div className="flex justify-between py-2 border-b"><span className="text-gray-500">Duration</span> <span className="font-bold">{tour.duration}</span></div>
-              <div className="flex justify-between py-2 border-b"><span className="text-gray-500">Transport</span> <span className="font-bold">Private A/C Vehicle</span></div>
-              <div className="flex justify-between py-2 border-b"><span className="text-gray-500">Guide</span> <span className="font-bold">English Speaking</span></div>
+              <div className="flex justify-between py-2 border-b border-gray-100">
+                <span className="text-gray-500 flex items-center gap-2"><Clock size={16}/> Duration</span> 
+                <span className="font-bold text-slate-900">{tour.duration}</span>
+              </div>
+              <div className="flex justify-between py-2 border-b border-gray-100">
+                <span className="text-gray-500 flex items-center gap-2"><Car size={16}/> Transport</span> 
+                <span className="font-bold text-slate-900">Private A/C</span>
+              </div>
+              <div className="flex justify-between py-2 border-b border-gray-100">
+                <span className="text-gray-500 flex items-center gap-2"><User size={16}/> Guide</span> 
+                <span className="font-bold text-slate-900">English/Tamil/Sinhala</span>
+              </div>
             </div>
+
+            {/* --- NEW: Included Features List --- */}
+            <div className="mb-8 bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3">
+              <h4 className="font-bold text-sm text-slate-800 mb-3 uppercase tracking-wide">Everything Included:</h4>
+              
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <Languages size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                <span className="font-medium">English / Tamil / Sinhala Guide & Driver</span>
+              </div>
+              
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <Users size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                <span>Only 2 Staff Members (Driver & Guide)</span>
+              </div>
+
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <Car size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                <span>Private, Comfortable A/C Vehicle</span>
+              </div>
+
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <Plane size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                <span>Free Airport Pick-up & Drop</span>
+              </div>
+
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <Droplet size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                <span>Bottled Water During the Tour</span>
+              </div>
+
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <ShieldCheck size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                <span>No Hidden Charges</span>
+              </div>
+            </div>
+
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-200 flex items-center justify-center gap-2 transform active:scale-95"
             >
               Book Now <ArrowRight size={20} />
             </button>
+            
+            <p className="text-xs text-center text-gray-400 mt-4 flex items-center justify-center gap-1">
+              <CheckCircle size={12} className="text-green-500"/> Customizable Itinerary & 24/7 Support
+            </p>
           </div>
         </div>
-      </div>
+        </div>
 
       {/* --- MOBILE STICKY BOOKING BAR --- */}
       <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between">
@@ -642,8 +566,6 @@ export default function TourDetail() {
           </motion.div>
         )}
       </AnimatePresence>
-      
-     
     </div>
   );
 }

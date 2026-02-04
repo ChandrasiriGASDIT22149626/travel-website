@@ -1,17 +1,19 @@
-'use client'; 
+'use client';
 import React from 'react';
-import { motion } from 'framer-motion'; 
-import { ArrowRight, MapPin, Calendar, Star, Compass } from 'lucide-react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowRight, MapPin, Calendar, Star, Compass, Clock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// --- DATA ARRAY ---
+// --- DATA ARRAY (With Prices) ---
 const packages = [
   {
     id: 1,
     title: "GOLDEN TRIANGLE & CULTURAL TREASURES",
     duration: "05 Nights",
     destinations: "03 Destinations",
+    price: "$613",
     desc: "Discover Sri Lanka’s rich cultural heritage with historic landmarks and traditions.",
     link: "/tour-packages/cultural-express",
     image: "/tours/cultural-express.webp",
@@ -23,6 +25,7 @@ const packages = [
     title: "TEA TRAILS & HILL COUNTRY ESCAPE",
     duration: "08 Nights",
     destinations: "07 Destinations",
+    price: "$589",
     desc: "Perfect for thrill seekers—safaris, hikes, and nature expeditions await.",
     link: "/tour-packages/adventure-tours",
     image: "/tours/hill-country.webp",
@@ -34,6 +37,7 @@ const packages = [
     title: "WAVES & WILDLIFE",
     duration: "07 Nights",
     destinations: "07 Destinations",
+    price: "$702",
     desc: "A premium tour combining luxury with iconic sights and authentic experiences.",
     link: "/tour-packages/classic-deluxe",
     image: "/tours/waves-wildlife.webp",
@@ -45,6 +49,7 @@ const packages = [
     title: "LUXURY SRI LANKA SIGNATURE",
     duration: "9 Nights",
     destinations: "08 Destinations",
+    price: "$1,062",
     desc: "Relax on golden beaches and enjoy coastal adventures with stunning sunsets.",
     link: "/tour-packages/beach-splash",
     image: "/tours/luxury-signature.webp",
@@ -55,6 +60,7 @@ const packages = [
     title: "ANCIENT WONDERS & WELLNESS",
     duration: "6 Nights",
     destinations: "04 Destinations",
+    price: "$697",
     desc: "The ultimate Sri Lanka experience—covering all major cultural and natural wonders.",
     link: "/tour-packages/grand-classic",
     image: "/tours/ancient-wonders.webp",
@@ -65,6 +71,7 @@ const packages = [
     title: "ADVENTURE SRI LANKA",
     duration: "8 Nights",
     destinations: "05 Destinations",
+    price: "$739",
     desc: "Explore national parks, wildlife safaris, and breathtaking natural landscapes.",
     link: "/tour-packages/wildlife-nature",
     image: "/tours/adventure.webp",
@@ -75,6 +82,7 @@ const packages = [
     title: "HONEYMOON IN PARADISE",
     duration: "6 Nights",
     destinations: "05 Destinations",
+    price: "$630",
     desc: "A dreamy getaway with romantic beaches, hills, and scenic escapes.",
     link: "/tour-packages/romantic-gateway",
     image: "/tours/honeymoon.webp",
@@ -85,6 +93,7 @@ const packages = [
     title: "ECO & NATURE TRAILS",
     duration: "07 Nights",
     destinations: "06 Destinations",
+    price: "$770",
     desc: "Rejuvenate with Ayurveda treatments and peaceful retreats across Sri Lanka.",
     link: "/tour-packages/wellness-ayurvedic",
     image: "https://images.unsplash.com/photo-1734279135113-8bd58bc02b69?q=80&w=800&auto=format&fit=crop",
@@ -95,8 +104,9 @@ const packages = [
     title: "RATHNAPURA TOUR",
     duration: "14 Nights",
     destinations: "08 Destinations",
+    price: "$605",
     desc: "Follow the Rathnapura trail visiting sacred temples and legendary sites.",
-    link:  "/tour-packages/gems-wellness",
+    link: "/tour-packages/gems-wellness",
     image: "/tours/ramayana.webp",
     color: "from-indigo-400 to-violet-600"
   }
@@ -107,7 +117,7 @@ export default function TourPackages() {
     <div className="relative min-h-screen font-sans bg-white text-slate-900 overflow-x-hidden">
       <Header />
 
-      {/* --- BACKGROUND DECORATION (Colorful Blobs) --- */}
+      {/* --- BACKGROUND DECORATION --- */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] right-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-100 rounded-full blur-[80px] md:blur-[100px] opacity-60" />
         <div className="absolute top-[20%] left-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-yellow-50 rounded-full blur-[80px] md:blur-[100px] opacity-60" />
@@ -116,10 +126,10 @@ export default function TourPackages() {
 
       <div className="relative z-10">
         
-        {/* --- HERO SECTION WITH BACKGROUND IMAGE --- */}
+        {/* --- HERO SECTION --- */}
         <section className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
           
-          {/* BACKGROUND IMAGE LAYER */}
+          {/* BACKGROUND IMAGE */}
           <div className="absolute inset-0 z-0">
             <img 
               src="/tours/background.jpg" 
@@ -130,7 +140,7 @@ export default function TourPackages() {
             <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white"></div>
           </div>
 
-          {/* CONTENT LAYER */}
+          {/* CONTENT */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -178,7 +188,6 @@ export default function TourPackages() {
                 {/* Image Side */}
                 <div className="w-full lg:w-1/2 relative group">
                   <div className={`absolute inset-0 bg-gradient-to-br ${pkg.color} rounded-[2rem] md:rounded-[3rem] transform rotate-3 scale-105 opacity-20 group-hover:rotate-6 transition-transform duration-500`}></div>
-                  {/* Adjusted height for mobile vs desktop */}
                   <div className="relative h-[300px] md:h-[400px] lg:h-[500px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
                     <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   </div>
@@ -187,6 +196,12 @@ export default function TourPackages() {
                     <span className="font-bold text-slate-900 uppercase tracking-widest text-xs md:text-sm flex items-center gap-2">
                       <Star size={16} className="text-yellow-500 fill-yellow-500" /> {pkg.tag}
                     </span>
+                  </div>
+                  
+                  {/* Price Badge */}
+                  <div className="absolute bottom-4 right-4 bg-yellow-400 text-slate-900 px-4 py-2 rounded-lg font-bold shadow-lg flex items-center gap-1 transform translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                    <span className="text-xs font-medium uppercase">From</span>
+                    <span className="text-lg">{pkg.price}</span>
                   </div>
                 </div>
 
@@ -225,9 +240,8 @@ export default function TourPackages() {
 
         {/* --- THE COLLECTION (Grid Layout) --- */}
         <section className="bg-slate-50 py-20 md:py-32 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden">
-          {/* Decorative Elements */}
+          {/* Decorative Text */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden pointer-events-none">
-             {/* Adjusted text size for mobile so it doesn't break layout */}
              <div className="absolute top-[5%] left-[5%] text-[6rem] md:text-[12rem] lg:text-[20rem] font-black text-slate-200 opacity-20 select-none">TOURS</div>
           </div>
 
@@ -245,24 +259,30 @@ export default function TourPackages() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
                   whileHover={{ y: -10 }}
-                  className="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100"
+                  className="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col"
                 >
                   <div className="relative h-56 md:h-64 overflow-hidden">
                     <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                    
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-900">
                       {pkg.duration}
                     </div>
+
+                    {/* Price Badge for Grid Items */}
+                    <div className="absolute bottom-4 left-4 bg-yellow-400 text-slate-900 px-3 py-1 rounded-lg font-bold text-sm shadow-md">
+                      {pkg.price}
+                    </div>
                   </div>
                   
-                  <div className="p-6 md:p-8">
+                  <div className="p-6 md:p-8 flex flex-col flex-grow">
                     <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
                       {pkg.title}
                     </h3>
-                    <p className="text-slate-500 text-sm mb-6 line-clamp-3">
+                    <p className="text-slate-500 text-sm mb-6 line-clamp-3 flex-grow">
                       {pkg.desc}
                     </p>
-                    <a href={pkg.link} className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <a href={pkg.link} className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-900 group-hover:text-blue-600 transition-colors mt-auto">
                       Explore This Tour <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </a>
                   </div>
@@ -276,7 +296,7 @@ export default function TourPackages() {
 
       </div>
       
-      
+      <Footer />
     </div>
   );
 }

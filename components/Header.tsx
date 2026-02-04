@@ -42,8 +42,9 @@ const Header = () => {
       
       {/* ==========================
           TOP ROW: Logo, Socials (Desktop), Hamburger (Mobile)
+          Adjusted padding here (py-4 -> py-2) to move header upward
       ========================== */}
-      <div className={`container mx-auto px-6 transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'}`}>
+      <div className={`container mx-auto px-6 transition-all duration-300 ${isScrolled ? 'py-1' : 'py-2'}`}>
         <div className="flex justify-between items-center">
           
           {/* LEFT: Logo */}
@@ -52,8 +53,8 @@ const Header = () => {
               <img 
                 src="/logo.png" 
                 alt="Logo" 
-                // UPDATED: Increased h- classes here
-                className={`w-auto object-contain cursor-pointer transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'h-13 md:h-17' : 'h-16 md:h-24'}`} 
+                // Adjusted logo height slightly to fit the more compact header
+                className={`w-auto object-contain cursor-pointer transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'h-12 md:h-16' : 'h-14 md:h-20'}`} 
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   const nextSibling = e.currentTarget.nextElementSibling;
@@ -94,8 +95,9 @@ const Header = () => {
 
       {/* ==========================
           BOTTOM ROW: Desktop Navigation
+          Adjusted padding here (py-3 -> py-2) to move contents upward
       ========================== */}
-      <div className={`hidden lg:block container mx-auto px-6 transition-all duration-300 ${isScrolled ? 'py-2' : 'py-3'}`}>
+      <div className={`hidden lg:block container mx-auto px-6 transition-all duration-300 ${isScrolled ? 'py-1' : 'py-2'}`}>
         <nav>
           <ul className="flex justify-end items-center space-x-8 text-sm font-medium tracking-wide">
             {navItems.map((item) => (

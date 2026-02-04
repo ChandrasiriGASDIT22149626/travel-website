@@ -46,7 +46,7 @@ const testimonials = [
     name: "Mark",
     country: "USA",
     text: "I was worried about traveling solo, but this team made me feel safe and welcomed. The itinerary was flexible enough to let me explore at my own pace.",
-    img: "https://images.unsplash.com/photo-1488161628813-994252662bf9?auto=format&fit=crop&q=80&w=1000"
+     img: "/feedback/background.jpg"
   },
   {
     name: "The Müller Family",
@@ -243,6 +243,7 @@ export default function Home() {
   <h3 className="text-yellow-400 font-bold tracking-[0.2em] uppercase mb-4 text-xs md:text-sm lg:text-base">
     Bethel Ceylon Tours
   </h3>
+ 
   <h1 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-extrabold text-white mb-4 lg:mb-6 leading-none tracking-tight drop-shadow-lg">
     {currentSlide.title}
   </h1>
