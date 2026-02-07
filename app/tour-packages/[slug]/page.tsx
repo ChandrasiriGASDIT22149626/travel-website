@@ -1,16 +1,19 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, ArrowRight, X, User, Mail, Phone, Globe, Activity, FileText, Send,  Star } from 'lucide-react';
+import { 
+  Calendar, MapPin, Clock, ArrowRight, X, User, Mail, Phone, Globe, 
+  Activity, FileText, Send, CheckCircle, Star, Car, Users, Plane, 
+  Droplet, ShieldCheck, Languages, Coffee 
+} from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useParams } from 'next/navigation';
-import { CheckCircle, Car, Users, Plane, Droplet, ShieldCheck, Languages, Headphones } from 'lucide-react';
 
 // --- CONFIGURATION ---
 const WHATSAPP_NUMBER = "94764136737";
 
-// --- TOUR DATA (Keys match your existing links, Content from Word Doc) ---
+// --- TOUR DATA ---
 const tourData: Record<string, any> = {
   "wildlife-nature": {
     title: "Adventure Sri Lanka",
@@ -25,13 +28,12 @@ const tourData: Record<string, any> = {
       "Beach relaxation in Bentota with sunset photography",
       "Extra free activities: river tubing, waterfall swimming, village cycling, forest canopy walks, paddy field and tea estate exploration, coastal walks, and photography opportunities",
       "Farewell dinner on the last night to celebrate your adventure"
-
     ],
     itinerary: [
       { day: "Day 1", title: "Arrival in Negombo (35 km / 45 min from airport)", desc: "Arrive at Bandaranaike International Airport and transfer to your hotel in Negombo. Relax and recover from your journey. In the evening, enjoy a sunset walk along Negombo Beach, take a stroll around Negombo Lagoon, or explore the Dutch Fort ruins. - Overnight: Negombo" },
       { day: "Day 2", title: "Negombo → Kitulgala (90 km / 2.5 hrs)", desc: "Travel to Kitulgala, located amid lush rainforest. Experience thrilling white-water rafting on the Kelani River. Free activities include river tubing, exploring the rainforest trails, waterfall photography, and visiting local riverside villages. . End the day with sunset photography along the riverbank. - Overnight: Kitulgala " },
       { day: "Day 3", title: "Kitulgala → Knuckles Range (150 km / 4–4.5 hrs)", desc: "Drive to the Knuckles Mountain Range, enjoying breathtaking views of the mountains, rivers, and tea plantations. Set up for mountain camping, with free activities such as scenic viewpoint photography, short walks through local villages and paddy fields, and sunset views from mountain ridges. - Overnight: Knuckles Mountain Range (Camping)" },
-      { day: "Day 4", title: "Knuckles Trekking", desc: "Spend the day trekking through the Knuckles region, encountering dense forests, waterfalls, and remote villages. Free activities include swimming in natural pools beneath waterfalls, canopy walks, birdwatching, and village cycling. Enjoy the sunset from a mountain viewpoint. - Spend the day trekking through the Knuckles region, encountering dense forests, waterfalls, and remote villages. Free activities include swimming in natural pools beneath waterfalls, canopy walks, birdwatching, and village cycling. Enjoy the sunset from a mountain viewpoint. - Overnight: Knuckles Mountain Range (Camping)" },
+      { day: "Day 4", title: "Knuckles Trekking", desc: "Spend the day trekking through the Knuckles region, encountering dense forests, waterfalls, and remote villages. Free activities include swimming in natural pools beneath waterfalls, canopy walks, birdwatching, and village cycling. Enjoy the sunset from a mountain viewpoint. - Overnight: Knuckles Mountain Range (Camping)" },
       { day: "Day 5", title: "Knuckles → Ella (160 km / 4–5 hrs)", desc: "Travel to Ella, passing scenic countryside, tea estates, and hillside villages. Free activities include stops at mini waterfalls, short village walks, and sunset photography from local viewpoints. Evening free to relax in Ella town. - Overnight: Ella" },
       { day: "Day 6", title: "Ella Sightseeing", desc: "Hike Ella Rock for panoramic views in the morning. Explore the Nine Arches Bridge and Ravana Falls, enjoying scenic hikes and photography opportunities. Free activities include walking through tea estates and paddy fields, visiting local markets, and strolling along village trails near Ravana Falls. - Overnight: Ella" },
       { day: "Day 7", title: "Ella → Yala (150 km / 4 hrs)", desc: "Travel to Yala, descending into the dry zone. In the afternoon, enjoy a jeep safari at Yala National Park, spotting leopards, elephants, deer, and exotic birds. Free activities include forest trails outside the park, photography of paddy fields and rivers, and sunset viewpoints." },
@@ -102,7 +104,7 @@ const tourData: Record<string, any> = {
       "Elephant safari at Udawalawe National Park",
       "Relaxing Ayurvedic spa treatment in Colombo",
       "Free experiences: village walks, river bathing, jungle viewpoints & sunset photography",
-      "•	Farewell dinner on the final night"
+      "•  Farewell dinner on the final night"
 
     ],
     itinerary: [
@@ -373,9 +375,9 @@ export default function TourDetail() {
           </div>
         </div>
 
-        {/* Right: Booking Card (Desktop Sticky) */}
-        <div className="hidden lg:block lg:col-span-1">
-          <div className="sticky top-24 bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+        {/* Right: Booking Card (Responsive) */}
+        <div className="lg:col-span-1">
+          <div className="bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-gray-100 lg:sticky lg:top-24">
             <h3 className="text-2xl font-bold mb-2 text-slate-900">Book This Tour</h3>
             <p className="text-gray-500 text-sm mb-6">Customizable & Private</p>
             
@@ -394,7 +396,7 @@ export default function TourDetail() {
               </div>
             </div>
 
-            {/* --- NEW: Included Features List --- */}
+            {/* --- Included Features List --- */}
             <div className="mb-8 bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3">
               <h4 className="font-bold text-sm text-slate-800 mb-3 uppercase tracking-wide">Everything Included:</h4>
               
@@ -416,6 +418,10 @@ export default function TourDetail() {
               <div className="flex items-start gap-3 text-sm text-gray-700">
                 <Plane size={18} className="text-blue-600 shrink-0 mt-0.5" />
                 <span>Free Airport Pick-up & Drop</span>
+              </div>
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <Coffee size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                <span>Breakfast Included</span>
               </div>
 
               <div className="flex items-start gap-3 text-sm text-gray-700">
@@ -441,7 +447,7 @@ export default function TourDetail() {
             </p>
           </div>
         </div>
-        </div>
+      </div>
 
       {/* --- MOBILE STICKY BOOKING BAR --- */}
       <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between">

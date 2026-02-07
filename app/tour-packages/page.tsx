@@ -132,7 +132,7 @@ export default function TourPackages() {
           {/* BACKGROUND IMAGE */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="/tours/background.jpg" 
+              src="/tours/background.webp" 
               alt="Sri Lanka Background" 
               className="w-full h-full object-cover"
             />

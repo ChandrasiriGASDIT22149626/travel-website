@@ -1,7 +1,8 @@
 'use client'; 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'; 
-import { Car, MapPin, Calendar, Clock, User, Phone, Mail, CheckCircle, ArrowRight } from 'lucide-react';
+// Kept Bus for the Van icon, Car for Car icon
+import { Car, MapPin, User, Phone, Mail, ArrowRight, Bus } from 'lucide-react'; 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -14,50 +15,23 @@ const LOCATIONS = [
 
 const VEHICLES = {
   Car: [
-  {
-    name: "Wagon R",
-    // Ensure 'wagon-r.jpg' exists in public/vehicles/cars/
-    image: "/vehicles/cars/wagon-r.webp"
-  },
-  {
-    name: "Fit Shuttle",
-    image: "/vehicles/cars/fit-shuttle.webp"
-  },
-  {
-    name: "Prado",
-    image: "/vehicles/cars/prado.webp"
-  },
-  {
-    name: "Vitz",
-    image: "/vehicles/cars/vitz.webp"
-  },
-  {
-    name: "Vezel",
-    image: "/vehicles/cars/vezel.webp"
-  },
-],
+    { name: "Wagon R", image: "/vehicles/cars/wagon-r.webp" },
+    { name: "Fit Shuttle", image: "/vehicles/cars/fit-shuttle.webp" },
+    { name: "Prado", image: "/vehicles/cars/prado.webp" },
+    { name: "Vitz", image: "/vehicles/cars/vitz.webp" },
+    { name: "Vezel", image: "/vehicles/cars/vezel.webp" },
+  ],
   Van: [
-  { 
-    name: "KDH", 
-    image: "/vehicles/vans/kdh.webp" 
-  },
-  { 
-    name: "Caravan", 
-    image: "/vehicles/vans/caravan.webp" 
-  },
-  { 
-    name: "Super GL", 
-    image: "/vehicles/vans/super-gl.webp" 
-  },
-  { 
-    name: "Spacia", 
-    image: "/vehicles/vans/spacia.webp" 
-  },
-  { 
-    name: "Every Van", 
-    image: "/vehicles/vans/every-van.webp" 
-  },
-],
+    { name: "KDH", image: "/vehicles/vans/kdh.webp" },
+    { name: "Caravan", image: "/vehicles/vans/caravan.webp" },
+    { name: "Super GL", image: "/vehicles/vans/super-gl.webp" },
+    { name: "Spacia", image: "/vehicles/vans/spacia.webp" },
+    { name: "Every Van", image: "/vehicles/vans/every-van.webp" },
+  ],
+  "Tuk Tuk": [
+    // Ensure you have the main vehicle image here for Step 3
+    { name: "TUk Tuk", image: "/vehicles/tuktuk/tuktuk.jpg" },
+  ],
 };
 
 // --- ANIMATION VARIANTS ---
@@ -68,7 +42,7 @@ const fadeIn = {
 
 export default function RentPage() {
   const [location, setLocation] = useState("");
-  const [vehicleType, setVehicleType] = useState<"Car" | "Van" | null>(null);
+  const [vehicleType, setVehicleType] = useState<"Car" | "Van" | "Tuk Tuk" | null>(null);
   const [selectedVehicle, setSelectedVehicle] = useState<string | null>(null);
   
   // Form State
@@ -128,7 +102,6 @@ Vehicle: ${selectedVehicle} (${vehicleType})
             alt="Car Rental" 
             className="w-full h-full object-cover opacity-60"
          />
-        
       </div>
 
       <div className="relative z-10 pt-32 pb-24 px-6 container mx-auto max-w-5xl">
@@ -180,18 +153,38 @@ Vehicle: ${selectedVehicle} (${vehicleType})
                   <span className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">02</span>
                   Select Vehicle Type
                 </h2>
-                <div className="flex gap-6">
-                  {["Car", "Van"].map((type) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {["Car", "Van", "Tuk Tuk"].map((type) => (
                     <button
                       key={type}
-                      onClick={() => { setVehicleType(type as "Car" | "Van"); setSelectedVehicle(null); }}
-                      className={`flex-1 py-6 rounded-xl border-2 font-bold text-lg transition-all flex flex-col items-center gap-2
+                      onClick={() => { setVehicleType(type as "Car" | "Van" | "Tuk Tuk"); setSelectedVehicle(null); }}
+                      // Added 'group' class here for hover effects on the image
+                      className={`flex-1 py-6 rounded-xl border-2 font-bold text-lg transition-all flex flex-col items-center gap-2 group
                         ${vehicleType === type 
                           ? "border-blue-600 bg-blue-600 text-white shadow-lg" 
                           : "border-gray-200 hover:bg-gray-50 text-gray-600"
                         }`}
                     >
-                      <Car size={32} />
+                      {/* --- ICONS & CUSTOM IMAGE --- */}
+                      {type === "Car" && <Car size={32} />}
+                      {type === "Van" && <Bus size={32} />}
+                      {type === "Tuk Tuk" && (
+                        // CUSTOM TUK TUK ICON IMAGE
+                        // Ensure /public/vehicles/tuktuk/icon.png exists
+                        <img 
+                          src="/vehicles/tuktuk/icon.png" 
+                          alt="Tuk Tuk Icon" 
+                          // CSS Filters to handle color changes:
+                          // If selected: brightness-0 invert makes a black icon white.
+                          // If not selected: grayscale opacity-50 makes it gray.
+                          className={`w-8 h-8 object-contain transition-all ${
+                            vehicleType === type 
+                              ? "brightness-0 invert" 
+                              : "grayscale opacity-50 group-hover:opacity-100 group-hover:grayscale-0"
+                          }`} 
+                        />
+                      )}
+                      
                       {type}
                     </button>
                   ))}
@@ -221,6 +214,7 @@ Vehicle: ${selectedVehicle} (${vehicleType})
                       `}
                     >
                       <div className="h-32 bg-gray-100 overflow-hidden">
+                        {/* Main Vehicle Image (e.g., tuktuk.webp) */}
                         <img src={vehicle.image} alt={vehicle.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       </div>
                       <div className="p-4 text-center">
@@ -337,7 +331,6 @@ Vehicle: ${selectedVehicle} (${vehicleType})
         </div>
       </div>
       
-     
     </div>
   );
 }

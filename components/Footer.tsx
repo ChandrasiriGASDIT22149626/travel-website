@@ -121,7 +121,7 @@ const Footer = () => {
             <div className="flex items-start justify-center md:justify-start gap-4 mb-6">
               <Phone className="text-[#7FB03F] mt-1" size={24} />
               <div className="text-left">
-                <p className="text-xl font-bold text-white">+94 77 726 5746</p>
+                <p className="text-xl font-bold text-white">+94 76 413 6737</p>
                 <p className="text-[10px] text-gray-400 uppercase tracking-widest leading-tight">(24/7) International</p>
               </div>
             </div>
@@ -130,7 +130,7 @@ const Footer = () => {
               <p>NEGOMBO, SRI LANKA.</p>
               {/* CHANGED: justify-center for mobile */}
               <p className="flex items-center justify-center md:justify-start gap-2 hover:text-[#7FB03F] cursor-pointer transition-colors">
-                <Mail size={16} className="text-[#7FB03F]" /> info@bethelceylontours.com
+                <Mail size={16} className="text-[#7FB03F]" /> betheltours36@gmail.com
               </p>
             </div>
           </motion.div>
